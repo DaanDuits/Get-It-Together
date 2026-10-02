@@ -1,29 +1,69 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Ignite.Input;
-using System.Runtime.CompilerServices;
+using Ignite.Movement.States;
+using Ignite.Movement.States.Factory;
 
 namespace Ignite.Movement
 {
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour, InputMap.IPlayerActions
     {
+        [SerializeField] private Vector3 camStartPos;
+        [SerializeField] private float rollSpeed;
+
         private CharacterController _controller;
         private InputMap _inputMap;
+
+        private PlayerMovementStateFactory _stateFactory;
+        private PlayerMovementState _currentState;
 
         private Vector2 _movementInput;
 
         private Vector3 _appliedMovement;
 
-        private Vector3 _camPos;
-        private Vector3 _angularVelocity;
+        private Vector3 _cameraPosition;
+        private Quaternion _rotation;
 
-        private float _phi, _theta;
-        private const float Radius = 0.5f;
+        private float _radius = 0.5f;
+
+        public PlayerMovementState CurrentState
+        {
+            get => _currentState;
+            set => _currentState = value; 
+        }
+        public Vector3 CamStartPos
+        { get => camStartPos; }
+        public Vector3 AppliedMovement
+        {
+            get => _appliedMovement;
+        }
+        public Vector3 Position
+        {
+            get => transform.position;
+        }
+        public Vector3 CameraPosition
+        {
+            get => _cameraPosition;
+            set => _cameraPosition = value;
+        }
+        public Quaternion Rotation
+        {
+            get => _rotation;
+            set => _rotation = value;
+        }
+        public float Radius
+        {
+            get => _radius;
+        }
 
         private void Start()
         {
             _controller = GetComponent<CharacterController>();
+            _stateFactory = new PlayerMovementStateFactory(this);
+
+            _currentState = _stateFactory.HeadState();
+            _currentState.EnterState();
         }
 
         private void OnEnable()
@@ -33,46 +73,30 @@ namespace Ignite.Movement
             _inputMap.Player.AddCallbacks(this);
         }
 
+        private void OnDisable()
+        {
+            _inputMap.Player.Disable();
+            _inputMap.Player.RemoveCallbacks(this);
+        }
+
         private void Update()
         {
-            _appliedMovement.x = _movementInput.x * 3.0f;
-            _appliedMovement.z = _movementInput.y * 3.0f;
+            _appliedMovement.x = _movementInput.x * rollSpeed;
+            _appliedMovement.z = _movementInput.y * rollSpeed;
 
             _appliedMovement = Quaternion.Euler(0, transform.eulerAngles.y, 0) * _appliedMovement; 
 
             _controller.Move(_appliedMovement * Time.deltaTime);
 
-            _angularVelocity.x = _appliedMovement.x / Radius;
-            _angularVelocity.y = _appliedMovement.z / Radius;
-            _angularVelocity.z = 0.0f;
+            Camera.main.transform.position = _cameraPosition;
+            Camera.main.transform.rotation = _rotation;
 
-            float sinPhi = Mathf.Sin(_phi);
-            if (Mathf.Abs(sinPhi) < 0.001f)
-                sinPhi = 0.001f * Mathf.Sign(sinPhi);
-            float cotPhi = Mathf.Cos(_phi) / sinPhi;
-
-            float dPhi = _angularVelocity.x * Mathf.Sin(_theta) - _angularVelocity.y * Mathf.Cos(_theta);
-            float dTheta = _angularVelocity.z - cotPhi * (_angularVelocity.x * Mathf.Cos(_theta) + _angularVelocity.y * Mathf.Sin(_theta));
-
-            _phi += dPhi * Time.deltaTime;
-            _theta += dTheta * Time.deltaTime; 
-            
-            _theta = Mathf.Repeat(_theta, Mathf.PI * 2f);
-            _phi = Mathf.Clamp(_phi, 0.001f, Mathf.PI - 0.001f);
-
-            _camPos.x = Mathf.Sin(_phi) * Mathf.Cos(_theta) * Radius;
-            _camPos.z = Mathf.Sin(_phi) * Mathf.Sin(_theta) * Radius;
-            _camPos.y = Mathf.Cos(_phi) * Radius;
+            _currentState.UpdateStates();
         }
 
         public void OnMove(InputAction.CallbackContext context)
         {
             _movementInput = context.ReadValue<Vector2>();
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawSphere(_camPos + transform.position, 0.1f);
         }
     }
 }
