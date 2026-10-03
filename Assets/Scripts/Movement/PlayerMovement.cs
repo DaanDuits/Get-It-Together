@@ -57,12 +57,9 @@ namespace Ignite.Movement
         public Vector3 AppliedMovement
         { get => _appliedMovement; }
         public Vector3 Position
-        { get => transform.position; }
+        { get => _currentLimb.transform.position; }
         public Vector3 CameraPosition
-        {
-            get => _cameraPosition;
-            set => _cameraPosition = value;
-        }
+        { set => _cameraPosition = value; }
         public Quaternion Rotation
         {
             get => _rotation;
