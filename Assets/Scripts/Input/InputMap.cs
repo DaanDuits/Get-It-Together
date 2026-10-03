@@ -103,6 +103,16 @@ namespace Ignite.Input
                     ""interactions"": """",
                     ""initialStateCheck"": true,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""MousePos"",
+                    ""type"": ""Value"",
+                    ""id"": ""8e537794-5cd3-44d1-bd11-7289a687fa1c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -204,6 +214,17 @@ namespace Ignite.Input
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab3b87d1-965c-49d9-98e1-9547b43280be"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -274,6 +295,7 @@ namespace Ignite.Input
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         }
 
         ~@InputMap()
@@ -355,6 +377,7 @@ namespace Ignite.Input
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_MousePos;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -370,6 +393,10 @@ namespace Ignite.Input
             /// Provides access to the underlying input action "Player/Move".
             /// </summary>
             public InputAction @Move => m_Wrapper.m_Player_Move;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/MousePos".
+            /// </summary>
+            public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -399,6 +426,9 @@ namespace Ignite.Input
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @MousePos.started += instance.OnMousePos;
+                @MousePos.performed += instance.OnMousePos;
+                @MousePos.canceled += instance.OnMousePos;
             }
 
             /// <summary>
@@ -413,6 +443,9 @@ namespace Ignite.Input
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @MousePos.started -= instance.OnMousePos;
+                @MousePos.performed -= instance.OnMousePos;
+                @MousePos.canceled -= instance.OnMousePos;
             }
 
             /// <summary>
@@ -525,6 +558,13 @@ namespace Ignite.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMove(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "MousePos" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnMousePos(InputAction.CallbackContext context);
         }
     }
 }

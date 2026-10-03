@@ -57,6 +57,7 @@ namespace Ignite.Movement.States
         protected void SetSubState(PlayerMovementState newSubState)
         {
             _currentSubState = newSubState;
+            _currentSubState.EnterState();
             _currentSubState.SetSuperState(this);
         }
     }

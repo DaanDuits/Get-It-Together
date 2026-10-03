@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Ignite.Input;
@@ -6,42 +7,57 @@ using Ignite.Movement.States.Factory;
 
 namespace Ignite.Movement
 {
-    [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour, InputMap.IPlayerActions
     {
-        [SerializeField] private Vector3 camStartPos;
+        [Header("Movement Parameters")]
         [SerializeField] private float rollSpeed;
+        [SerializeField] private float legSpeed;
+        [Header("Possession Parameters")]
+        [SerializeField] private LimbController startLimb;
+        [SerializeField] private float possessionDistance;
+        [SerializeField] private LayerMask possessionLayer;
+        [Header("Camera Parameters")]
+        [SerializeField] private Vector3 camStartPos;
+        [SerializeField] private new Camera camera;
 
-        private CharacterController _controller;
+        private LimbController _currentLimb;
         private InputMap _inputMap;
 
         private PlayerMovementStateFactory _stateFactory;
         private PlayerMovementState _currentState;
 
         private Vector2 _movementInput;
+        private Vector2 _mousePos;
 
         private Vector3 _appliedMovement;
+        private float _movementSpeed;
 
         private Vector3 _cameraPosition;
         private Quaternion _rotation;
 
         private float _radius = 0.5f;
 
+        public LimbController CurrentLimb
+        { get => _currentLimb; }
         public PlayerMovementState CurrentState
         {
             get => _currentState;
             set => _currentState = value; 
         }
+        public float RollSpeed
+        { get => rollSpeed; }
+        public float LegSpeed
+        { get => legSpeed; }
+        public float MovementSpeed
+        { set => _movementSpeed = value; }
         public Vector3 CamStartPos
         { get => camStartPos; }
+        public Vector2 MovementInput
+        { get => _movementInput; }
         public Vector3 AppliedMovement
-        {
-            get => _appliedMovement;
-        }
+        { get => _appliedMovement; }
         public Vector3 Position
-        {
-            get => transform.position;
-        }
+        { get => transform.position; }
         public Vector3 CameraPosition
         {
             get => _cameraPosition;
@@ -53,13 +69,14 @@ namespace Ignite.Movement
             set => _rotation = value;
         }
         public float Radius
-        {
-            get => _radius;
-        }
+        { get => _radius; }
 
-        private void Start()
+        private void Awake()
         {
-            _controller = GetComponent<CharacterController>();
+            if (camera == null)
+                camera = Camera.main;
+
+            _currentLimb = startLimb;
             _stateFactory = new PlayerMovementStateFactory(this);
 
             _currentState = _stateFactory.HeadState();
@@ -81,22 +98,36 @@ namespace Ignite.Movement
 
         private void Update()
         {
-            _appliedMovement.x = _movementInput.x * rollSpeed;
-            _appliedMovement.z = _movementInput.y * rollSpeed;
+            _appliedMovement.x = _movementInput.x * _movementSpeed;
+            _appliedMovement.z = _movementInput.y * _movementSpeed;
 
             _appliedMovement = Quaternion.Euler(0, transform.eulerAngles.y, 0) * _appliedMovement; 
 
-            _controller.Move(_appliedMovement * Time.deltaTime);
+            _currentLimb.Controller.Move(_appliedMovement * Time.deltaTime);
 
-            Camera.main.transform.position = _cameraPosition;
-            Camera.main.transform.rotation = _rotation;
+            camera.transform.position = _cameraPosition;
+            camera.transform.rotation = _rotation;
 
             _currentState.UpdateStates();
+        }
+
+        private void FixedUpdate()
+        {
+            Ray ray = camera.ScreenPointToRay(_mousePos);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer))
+            {
+                _currentLimb = hit.collider.gameObject.GetComponent<LimbController>();
+            }
         }
 
         public void OnMove(InputAction.CallbackContext context)
         {
             _movementInput = context.ReadValue<Vector2>();
+        }
+        public void OnMousePos(InputAction.CallbackContext context)
+        {
+            _mousePos = context.ReadValue<Vector2>();
         }
     }
 }

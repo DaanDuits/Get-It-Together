@@ -5,7 +5,8 @@ namespace Ignite.Movement.States.Factory
     public enum EPlayerMovementStates
     {
         PlayerHeadState,
-        HeadMoveState
+        HeadMoveState,
+        PlayerLegState
     }
 
     public class PlayerMovementStateFactory
@@ -19,8 +20,9 @@ namespace Ignite.Movement.States.Factory
 
             _states = new Dictionary<EPlayerMovementStates, PlayerMovementState>
             {
-                {EPlayerMovementStates.PlayerHeadState, new PlayerHeadState(context, this) },
-                {EPlayerMovementStates.HeadMoveState, new HeadMoveState(context, this) }
+                { EPlayerMovementStates.PlayerHeadState, new PlayerHeadState(context, this) },
+                { EPlayerMovementStates.HeadMoveState, new HeadMoveState(context, this) },
+                { EPlayerMovementStates.PlayerLegState, new PlayerLegState(context, this) }
             };
         }
 
@@ -31,6 +33,10 @@ namespace Ignite.Movement.States.Factory
         public PlayerMovementState HeadMoveState()
         {
             return _states[EPlayerMovementStates.HeadMoveState];
+        }
+        public PlayerMovementState LegState()
+        {
+            return _states[EPlayerMovementStates.PlayerLegState];
         }
     }
 }

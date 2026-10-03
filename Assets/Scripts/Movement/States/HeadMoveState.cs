@@ -13,7 +13,9 @@ namespace Ignite.Movement.States
         }
 
         public override void EnterState()
-        { }
+        {
+            Context.MovementSpeed = Context.RollSpeed;
+        }
         public override void UpdateState()
         {
             Vector3 w = Vector3.Cross(Context.AppliedMovement, Vector3.up) / Context.Radius;
