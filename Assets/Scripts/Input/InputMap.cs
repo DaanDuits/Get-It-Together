@@ -113,6 +113,16 @@ namespace Ignite.Input
                     ""interactions"": """",
                     ""initialStateCheck"": true,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""MousePressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d039c50-3718-4cde-a021-e1eece47a0ec"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -225,6 +235,17 @@ namespace Ignite.Input
                     ""action"": ""MousePos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cccb93d-6459-4053-a22b-f8275f5cd5ce"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""MousePressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -296,6 +317,7 @@ namespace Ignite.Input
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
+            m_Player_MousePressed = m_Player.FindAction("MousePressed", throwIfNotFound: true);
         }
 
         ~@InputMap()
@@ -378,6 +400,7 @@ namespace Ignite.Input
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_MousePos;
+        private readonly InputAction m_Player_MousePressed;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -397,6 +420,10 @@ namespace Ignite.Input
             /// Provides access to the underlying input action "Player/MousePos".
             /// </summary>
             public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/MousePressed".
+            /// </summary>
+            public InputAction @MousePressed => m_Wrapper.m_Player_MousePressed;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -429,6 +456,9 @@ namespace Ignite.Input
                 @MousePos.started += instance.OnMousePos;
                 @MousePos.performed += instance.OnMousePos;
                 @MousePos.canceled += instance.OnMousePos;
+                @MousePressed.started += instance.OnMousePressed;
+                @MousePressed.performed += instance.OnMousePressed;
+                @MousePressed.canceled += instance.OnMousePressed;
             }
 
             /// <summary>
@@ -446,6 +476,9 @@ namespace Ignite.Input
                 @MousePos.started -= instance.OnMousePos;
                 @MousePos.performed -= instance.OnMousePos;
                 @MousePos.canceled -= instance.OnMousePos;
+                @MousePressed.started -= instance.OnMousePressed;
+                @MousePressed.performed -= instance.OnMousePressed;
+                @MousePressed.canceled -= instance.OnMousePressed;
             }
 
             /// <summary>
@@ -565,6 +598,13 @@ namespace Ignite.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMousePos(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "MousePressed" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnMousePressed(InputAction.CallbackContext context);
         }
     }
 }

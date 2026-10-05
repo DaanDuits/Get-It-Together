@@ -1,11 +1,13 @@
+using Ignite.Movement;
+using Ignite.Movement.States;
 using Ignite.Movement.States.Factory;
 using UnityEngine;
 
-namespace Ignite.Movement.States
+namespace Ignite
 {
-    public class PlayerLegState : PlayerMovementState, IRootState
+    public class PlayerArmState : PlayerMovementState, IRootState
     {
-        public PlayerLegState(PlayerMovement context, PlayerMovementStateFactory factory)
+        public PlayerArmState(PlayerMovement context, PlayerMovementStateFactory factory)
             : base(context, factory)
         {
             IsRootState = true;
@@ -14,7 +16,7 @@ namespace Ignite.Movement.States
         public override void EnterState()
         {
             InitializeSubState();
-            Context.MovementSpeed = Context.LegSpeed;
+            Context.MovementSpeed = Context.ArmSpeed;
         }
         public override void UpdateState()
         {
@@ -26,8 +28,8 @@ namespace Ignite.Movement.States
         {
             if (Context.CurrentLimb.Type == ELimbType.Head)
                 SwitchState(Factory.HeadState());
-            if (Context.CurrentLimb.Type == ELimbType.Arm)
-                SwitchState(Factory.ArmState()); 
+            if (Context.CurrentLimb.Type == ELimbType.Leg)
+                SwitchState(Factory.LegState());
         }
         public void InitializeSubState()
         { }

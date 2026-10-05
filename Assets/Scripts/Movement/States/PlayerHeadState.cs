@@ -24,6 +24,8 @@ namespace Ignite.Movement.States
         {
             if (Context.CurrentLimb.Type == ELimbType.Leg)
                 SwitchState(Factory.LegState());
+            if (Context.CurrentLimb.Type == ELimbType.Arm)
+                SwitchState(Factory.ArmState());
         }
         public void InitializeSubState()
         {

@@ -10,15 +10,17 @@ namespace Ignite.Movement
     public class PlayerMovement : MonoBehaviour, InputMap.IPlayerActions
     {
         [Header("Movement Parameters")]
-        [SerializeField] private float rollSpeed;
-        [SerializeField] private float legSpeed;
+        [SerializeField] private float rollSpeed = 1.5f;
+        [SerializeField] private float legSpeed = 2f;
+        [SerializeField] private float armSpeed = 1f;
         [Header("Possession Parameters")]
         [SerializeField] private LimbController startLimb;
-        [SerializeField] private float possessionDistance;
+        [SerializeField] private float possessionDistance = 10f;
         [SerializeField] private LayerMask possessionLayer;
         [Header("Camera Parameters")]
         [SerializeField] private Vector3 camStartPos;
         [SerializeField] private new Camera camera;
+        [SerializeField] private GameObject winScreen;
 
         private LimbController _currentLimb;
         private InputMap _inputMap;
@@ -30,13 +32,16 @@ namespace Ignite.Movement
         private Vector2 _mousePos;
 
         private Vector3 _appliedMovement;
-        private Quaternion _appliedRotation;
         private float _movementSpeed;
 
         private Vector3 _cameraPosition;
         private Quaternion _rotation;
 
-        private float _radius = 0.5f;
+        private float _radius = 0.3f;
+
+        private bool _mousePressed = false;
+
+        private int _winCounter = 0;
 
         public LimbController CurrentLimb
         { get => _currentLimb; }
@@ -49,6 +54,8 @@ namespace Ignite.Movement
         { get => rollSpeed; }
         public float LegSpeed
         { get => legSpeed; }
+        public float ArmSpeed
+        { get => armSpeed; }
         public float MovementSpeed
         { set => _movementSpeed = value; }
         public Vector3 CamStartPos
@@ -76,6 +83,8 @@ namespace Ignite.Movement
 
             _currentLimb = startLimb;
             _stateFactory = new PlayerMovementStateFactory(this);
+
+            _cameraPosition = _currentLimb.transform.position + camStartPos;
 
             _currentState = _stateFactory.HeadState();
             _currentState.EnterState();
@@ -111,8 +120,24 @@ namespace Ignite.Movement
         {
             Ray ray = camera.ScreenPointToRay(_mousePos);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer) && _mousePressed)
                 _currentLimb = hit.collider.gameObject.GetComponent<LimbController>();
+            else if (_mousePressed)
+                _currentLimb = startLimb;
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if ((LayerMask.GetMask("Limb") & (1 << other.gameObject.layer)) > 0)
+                _winCounter++;
+
+            if (_winCounter == 5)
+                winScreen.SetActive(true);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if ((LayerMask.GetMask("Limb") & (1 << other.gameObject.layer)) > 0)
+                _winCounter--;
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -122,6 +147,14 @@ namespace Ignite.Movement
         public void OnMousePos(InputAction.CallbackContext context)
         {
             _mousePos = context.ReadValue<Vector2>();
+        }
+
+        public void OnMousePressed(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                _mousePressed = true;
+            if (context.canceled)
+                _mousePressed = false;
         }
     }
 }

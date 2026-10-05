@@ -6826,7 +6826,7 @@ GameObject:
   - component: {fileID: 786431999}
   - component: {fileID: 786431998}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6859,8 +6859,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8375ac2d2e256e54b8e85567f154d86e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.PlayerMovement
-  camStartPos: {x: 0, y: 0, z: 0.5}
   rollSpeed: 1.5
+  legSpeed: 0
+  startLimb: {fileID: 0}
+  possessionDistance: 0
+  possessionLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  camStartPos: {x: 0, y: 0, z: 0.5}
+  camera: {fileID: 0}
 --- !u!143 &786431999
 CharacterController:
   m_ObjectHideFlags: 0

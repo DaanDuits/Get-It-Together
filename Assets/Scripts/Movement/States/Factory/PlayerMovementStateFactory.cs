@@ -6,7 +6,8 @@ namespace Ignite.Movement.States.Factory
     {
         PlayerHeadState,
         HeadMoveState,
-        PlayerLegState
+        PlayerLegState,
+        PlayerArmState
     }
 
     public class PlayerMovementStateFactory
@@ -22,7 +23,8 @@ namespace Ignite.Movement.States.Factory
             {
                 { EPlayerMovementStates.PlayerHeadState, new PlayerHeadState(context, this) },
                 { EPlayerMovementStates.HeadMoveState, new HeadMoveState(context, this) },
-                { EPlayerMovementStates.PlayerLegState, new PlayerLegState(context, this) }
+                { EPlayerMovementStates.PlayerLegState, new PlayerLegState(context, this) },
+                { EPlayerMovementStates.PlayerArmState, new PlayerArmState(context, this) }
             };
         }
 
@@ -37,6 +39,10 @@ namespace Ignite.Movement.States.Factory
         public PlayerMovementState LegState()
         {
             return _states[EPlayerMovementStates.PlayerLegState];
+        }
+        public PlayerMovementState ArmState()
+        {
+            return _states[EPlayerMovementStates.PlayerArmState];
         }
     }
 }
