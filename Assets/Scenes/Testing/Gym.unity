@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 148698272}
   - component: {fileID: 148698271}
   - component: {fileID: 148698270}
-  - component: {fileID: 148698269}
   - component: {fileID: 148698268}
   - component: {fileID: 148698267}
   m_Layer: 3
@@ -251,7 +250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &148698267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,32 +283,11 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_Radius: 1.1
+  m_SlopeLimit: 0
+  m_StepOffset: 0
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &148698269
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148698266}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &148698270
 MeshRenderer:
@@ -1184,6 +1162,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
+  - {fileID: 284610417}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1339218152}
@@ -1192,4 +1171,3 @@ SceneRoots:
   - {fileID: 582393032}
   - {fileID: 1432740984}
   - {fileID: 148698272}
-  - {fileID: 284610417}

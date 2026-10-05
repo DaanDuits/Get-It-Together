@@ -30,6 +30,7 @@ namespace Ignite.Movement
         private Vector2 _mousePos;
 
         private Vector3 _appliedMovement;
+        private Quaternion _appliedRotation;
         private float _movementSpeed;
 
         private Vector3 _cameraPosition;
@@ -98,8 +99,6 @@ namespace Ignite.Movement
             _appliedMovement.x = _movementInput.x * _movementSpeed;
             _appliedMovement.z = _movementInput.y * _movementSpeed;
 
-            _appliedMovement = Quaternion.Euler(0, transform.eulerAngles.y, 0) * _appliedMovement; 
-
             _currentLimb.Controller.Move(_appliedMovement * Time.deltaTime);
 
             camera.transform.position = _cameraPosition;
@@ -113,9 +112,7 @@ namespace Ignite.Movement
             Ray ray = camera.ScreenPointToRay(_mousePos);
 
             if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer))
-            {
                 _currentLimb = hit.collider.gameObject.GetComponent<LimbController>();
-            }
         }
 
         public void OnMove(InputAction.CallbackContext context)
