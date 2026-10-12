@@ -21,6 +21,7 @@ namespace Ignite.Movement
         [SerializeField] private Vector3 camStartPos;
         [SerializeField] private new Camera camera;
         [SerializeField] private GameObject winScreen;
+        [SerializeField] private Material completeMaterial, incompleteMaterial;
 
         private LimbController _currentLimb;
         private InputMap _inputMap;
@@ -132,12 +133,20 @@ namespace Ignite.Movement
 
             if (_winCounter == 5)
                 winScreen.SetActive(true);
+
+            if (_currentLimb.GetComponentInChildren<SkinnedMeshRenderer>() == null)
+                return;
+            _currentLimb.GetComponentInChildren<SkinnedMeshRenderer>().material = completeMaterial;
         }
 
         private void OnTriggerExit(Collider other)
         {
             if ((LayerMask.GetMask("Limb") & (1 << other.gameObject.layer)) > 0)
                 _winCounter--;
+
+            if (_currentLimb.GetComponentInChildren<SkinnedMeshRenderer>() == null)
+                return;
+            _currentLimb.GetComponentInChildren<SkinnedMeshRenderer>().material = incompleteMaterial;
         }
 
         public void OnMove(InputAction.CallbackContext context)
