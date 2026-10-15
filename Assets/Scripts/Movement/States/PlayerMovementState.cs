@@ -60,5 +60,10 @@ namespace Ignite.Movement.States
             _currentSubState.EnterState();
             _currentSubState.SetSuperState(this);
         }
+
+        protected bool IsCurrentSuperState(PlayerMovementState current)
+        {
+            return _currentSuperState == current;
+        }
     }
 }

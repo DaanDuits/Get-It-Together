@@ -16,7 +16,6 @@ namespace Ignite
         public override void EnterState()
         {
             InitializeSubState();
-            Context.MovementSpeed = Context.ArmSpeed;
         }
         public override void UpdateState()
         {

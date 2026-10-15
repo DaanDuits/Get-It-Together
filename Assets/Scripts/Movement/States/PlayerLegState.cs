@@ -1,10 +1,20 @@
 using Ignite.Movement.States.Factory;
+using NUnit.Framework.Constraints;
+using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 
 namespace Ignite.Movement.States
 {
     public class PlayerLegState : PlayerMovementState, IRootState
     {
+        private float _rotation;
+        private float _hopDistance = 1.5f;
+        private float _maxHeight = 2f;
+        private bool _jump = false;
+
+        private Vector3 _originalPos;
+
         public PlayerLegState(PlayerMovement context, PlayerMovementStateFactory factory)
             : base(context, factory)
         {
@@ -14,12 +24,49 @@ namespace Ignite.Movement.States
         public override void EnterState()
         {
             InitializeSubState();
-            Context.MovementSpeed = Context.LegSpeed;
+            Context.AppliedMovement = Vector3.zero;
+            _rotation = Context.Rotation.eulerAngles.y;
         }
         public override void UpdateState()
         {
             CheckSwitchStates();
+            _rotation += Context.MovementInput.x * Context.LegSpeed * Time.deltaTime;
+            Context.Rotation = Quaternion.AngleAxis(_rotation, Vector3.up);
+
+            if (Context.SpacePressed && !_jump)
+            {
+                _jump = true;
+                _originalPos = Context.Position;
+                Context.StartCoroutine(PlotParabola());
+            }
         }
+        public IEnumerator PlotParabola()
+        {
+            float time = 0f;
+
+            while (_jump)
+            {
+                if (time == 1f)
+                    _jump = false;
+
+                float y = Context.LegHopCurve.Evaluate(time) * _maxHeight;
+                float x = time * _hopDistance;
+
+                Vector3 forward = Context.CurrentLimb.transform.forward * x;
+                Context.Position =  new Vector3(_originalPos.x + forward.x, _originalPos.y + y, _originalPos.z + forward.z);
+
+                yield return null;
+
+
+                time = Mathf.Clamp01(time + Time.deltaTime);
+            }
+            float finalY = Context.LegHopCurve.Evaluate(1f) * _maxHeight;
+            float finalX = _hopDistance;
+
+            Vector3 finalForward = Context.CurrentLimb.transform.forward * finalX;
+            Context.Position = new Vector3(_originalPos.x + finalForward.x, _originalPos.y + finalY, _originalPos.z + finalForward.z);
+        }
+
         public override void ExitState()
         { }
         public override void CheckSwitchStates()

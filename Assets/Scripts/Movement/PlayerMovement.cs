@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Ignite.Input;
@@ -12,6 +11,7 @@ namespace Ignite.Movement
         [Header("Movement Parameters")]
         [SerializeField] private float rollSpeed = 1.5f;
         [SerializeField] private float legSpeed = 2f;
+        [SerializeField] private AnimationCurve legHopCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0f, 0f), new Keyframe(0.5f, 1f), new Keyframe(1f, 0f) });
         [SerializeField] private float armSpeed = 1f;
         [Header("Possession Parameters")]
         [SerializeField] private LimbController startLimb;
@@ -30,20 +30,23 @@ namespace Ignite.Movement
         private PlayerMovementState _currentState;
 
         private Vector2 _movementInput;
+        private bool _isMoving = false;
         private Vector2 _mousePos;
 
         private Vector3 _appliedMovement;
-        private float _movementSpeed;
 
         private Vector3 _cameraPosition;
-        private Quaternion _rotation;
+        private Quaternion _cameraRotation;
 
         private float _radius = 0.3f;
 
         private bool _mousePressed = false;
+        private bool _spacePressed = false;
 
         private int _winCounter = 0;
 
+        public AnimationCurve LegHopCurve
+        { get => legHopCurve; }
         public LimbController CurrentLimb
         { get => _currentLimb; }
         public PlayerMovementState CurrentState
@@ -57,25 +60,48 @@ namespace Ignite.Movement
         { get => legSpeed; }
         public float ArmSpeed
         { get => armSpeed; }
-        public float MovementSpeed
-        { set => _movementSpeed = value; }
         public Vector3 CamStartPos
         { get => camStartPos; }
         public Vector2 MovementInput
         { get => _movementInput; }
+        public bool IsMoving
+        { get => _isMoving; }
         public Vector3 AppliedMovement
-        { get => _appliedMovement; }
+        {
+            get => _appliedMovement;
+            set => _appliedMovement = value;
+        }
+        public float AppliedMovementX
+        { 
+            get => _appliedMovement.x;
+            set => _appliedMovement.x = value;
+        }
+        public float AppliedMovementZ
+        { 
+            get => _appliedMovement.z;
+            set => _appliedMovement.z = value;
+        }
         public Vector3 Position
-        { get => _currentLimb.transform.position; }
+        { 
+            get => _currentLimb.transform.position; 
+            set => _currentLimb.transform.position = value;
+        }
+        public Quaternion Rotation
+        { 
+            get => _currentLimb.transform.rotation; 
+            set => _currentLimb.transform.rotation = value;
+        }
         public Vector3 CameraPosition
         { set => _cameraPosition = value; }
-        public Quaternion Rotation
+        public Quaternion CameraRotation
         {
-            get => _rotation;
-            set => _rotation = value;
+            get => _cameraRotation;
+            set => _cameraRotation = value;
         }
         public float Radius
         { get => _radius; }
+        public bool SpacePressed
+        { get => _spacePressed; }
 
         private void Awake()
         {
@@ -106,15 +132,12 @@ namespace Ignite.Movement
 
         private void Update()
         {
-            _appliedMovement.x = _movementInput.x * _movementSpeed;
-            _appliedMovement.z = _movementInput.y * _movementSpeed;
+            _currentState.UpdateStates();
 
             _currentLimb.Controller.Move(_appliedMovement * Time.deltaTime);
 
             camera.transform.position = _cameraPosition;
-            camera.transform.rotation = _rotation;
-
-            _currentState.UpdateStates();
+            camera.transform.rotation = _cameraRotation;
         }
 
         private void FixedUpdate()
@@ -126,6 +149,7 @@ namespace Ignite.Movement
             else if (_mousePressed)
                 _currentLimb = startLimb;
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if ((LayerMask.GetMask("Limb") & (1 << other.gameObject.layer)) > 0)
@@ -152,6 +176,7 @@ namespace Ignite.Movement
         public void OnMove(InputAction.CallbackContext context)
         {
             _movementInput = context.ReadValue<Vector2>();
+            _isMoving = MovementInput.x != 0f || MovementInput.y != 0f;
         }
         public void OnMousePos(InputAction.CallbackContext context)
         {
@@ -164,6 +189,14 @@ namespace Ignite.Movement
                 _mousePressed = true;
             if (context.canceled)
                 _mousePressed = false;
+        }
+
+        public void OnSpacePressed(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                _spacePressed = true;
+            if (context.canceled)
+                _spacePressed = false;
         }
     }
 }

@@ -35,6 +35,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "SpacePressed",
+                    "type": "Button",
+                    "id": "19122387-94a5-46a3-94f5-634be52f0e17",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -156,6 +166,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "MousePressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3781ab00-000a-4b16-831e-3fdbccdf8195",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "SpacePressed",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

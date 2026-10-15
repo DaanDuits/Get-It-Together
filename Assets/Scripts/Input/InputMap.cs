@@ -123,6 +123,16 @@ namespace Ignite.Input
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""SpacePressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""19122387-94a5-46a3-94f5-634be52f0e17"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -246,6 +256,17 @@ namespace Ignite.Input
                     ""action"": ""MousePressed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3781ab00-000a-4b16-831e-3fdbccdf8195"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SpacePressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -318,6 +339,7 @@ namespace Ignite.Input
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
             m_Player_MousePressed = m_Player.FindAction("MousePressed", throwIfNotFound: true);
+            m_Player_SpacePressed = m_Player.FindAction("SpacePressed", throwIfNotFound: true);
         }
 
         ~@InputMap()
@@ -401,6 +423,7 @@ namespace Ignite.Input
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_MousePos;
         private readonly InputAction m_Player_MousePressed;
+        private readonly InputAction m_Player_SpacePressed;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -424,6 +447,10 @@ namespace Ignite.Input
             /// Provides access to the underlying input action "Player/MousePressed".
             /// </summary>
             public InputAction @MousePressed => m_Wrapper.m_Player_MousePressed;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/SpacePressed".
+            /// </summary>
+            public InputAction @SpacePressed => m_Wrapper.m_Player_SpacePressed;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -459,6 +486,9 @@ namespace Ignite.Input
                 @MousePressed.started += instance.OnMousePressed;
                 @MousePressed.performed += instance.OnMousePressed;
                 @MousePressed.canceled += instance.OnMousePressed;
+                @SpacePressed.started += instance.OnSpacePressed;
+                @SpacePressed.performed += instance.OnSpacePressed;
+                @SpacePressed.canceled += instance.OnSpacePressed;
             }
 
             /// <summary>
@@ -479,6 +509,9 @@ namespace Ignite.Input
                 @MousePressed.started -= instance.OnMousePressed;
                 @MousePressed.performed -= instance.OnMousePressed;
                 @MousePressed.canceled -= instance.OnMousePressed;
+                @SpacePressed.started -= instance.OnSpacePressed;
+                @SpacePressed.performed -= instance.OnSpacePressed;
+                @SpacePressed.canceled -= instance.OnSpacePressed;
             }
 
             /// <summary>
@@ -605,6 +638,13 @@ namespace Ignite.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMousePressed(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "SpacePressed" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSpacePressed(InputAction.CallbackContext context);
         }
     }
 }
