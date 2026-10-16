@@ -13,8 +13,6 @@ namespace Ignite.Movement.States
         private float _maxHeight = 2f;
         private bool _jump = false;
 
-        private Vector3 _originalPos;
-
         public PlayerLegState(PlayerMovement context, PlayerMovementStateFactory factory)
             : base(context, factory)
         {
@@ -35,7 +33,7 @@ namespace Ignite.Movement.States
             if (Context.IsSpacePressed && !_jump)
             {
                 _jump = true;
-                _originalPos = Context.Position;
+                Context.IsPossessionLocked = true;
                 Context.StartCoroutine(PlotParabola());
             }
         }
@@ -62,7 +60,8 @@ namespace Ignite.Movement.States
 
                 time = Mathf.Clamp01(time + Time.deltaTime);
             }
-            Context.AppliedMovement = Vector3.zero;
+            Context.AppliedMovement = Vector3.zero; 
+            Context.IsPossessionLocked = false;
         }
 
         public override void ExitState()

@@ -31,7 +31,7 @@ namespace Ignite.Movement
         private Vector3 _appliedMovement;
 
         private Vector2 _mousePos;
-        private bool _mousePressed = false;
+        private bool _isMousePressed = false;
 
         private int _winCounter = 0;
 
@@ -87,7 +87,7 @@ namespace Ignite.Movement
         public bool IsSpacePressed
         { get; private set; }
         public bool IsPossessionLocked
-        { get; private set; }
+        { get; set; }
 
         private void Awake()
         {
@@ -130,9 +130,11 @@ namespace Ignite.Movement
         {
             Ray ray = camera.ScreenPointToRay(_mousePos);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer) && _mousePressed)
+            bool canPossess = _isMousePressed && !IsPossessionLocked;
+
+            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer) && canPossess)
                 CurrentLimb = hit.collider.gameObject.GetComponent<LimbController>();
-            else if (_mousePressed)
+            else if (canPossess)
                 CurrentLimb = startLimb;
         }
 
@@ -172,9 +174,9 @@ namespace Ignite.Movement
         public void OnMousePressed(InputAction.CallbackContext context)
         {
             if (context.started)
-                _mousePressed = true;
+                _isMousePressed = true;
             if (context.canceled)
-                _mousePressed = false;
+                _isMousePressed = false;
         }
 
         public void OnSpacePressed(InputAction.CallbackContext context)
