@@ -24,7 +24,6 @@ namespace Ignite.Movement.States
         public override void EnterState()
         {
             InitializeSubState();
-            Context.AppliedMovement = Vector3.zero;
             _rotation = Context.Rotation.eulerAngles.y;
         }
         public override void UpdateState()
@@ -50,21 +49,20 @@ namespace Ignite.Movement.States
                     _jump = false;
 
                 float y = Context.LegHopCurve.Evaluate(time) * _maxHeight;
-                float x = time * _hopDistance;
+                float x = _hopDistance / 1f;
 
-                Vector3 forward = Context.CurrentLimb.transform.forward * x;
-                Context.Position =  new Vector3(_originalPos.x + forward.x, _originalPos.y + y, _originalPos.z + forward.z);
+                Vector3 forward = Context.CurrentLimb.transform.forward.normalized;
+                Context.AppliedMovement = new Vector3(forward.x * x, 0, forward.z * x);
+
+                Vector3 visualPos = new Vector3(Context.Position.x, Context.Position.y + y, Context.Position.z);
+                Context.CurrentLimb.VisualObject.transform.position = visualPos;
 
                 yield return null;
 
 
                 time = Mathf.Clamp01(time + Time.deltaTime);
             }
-            float finalY = Context.LegHopCurve.Evaluate(1f) * _maxHeight;
-            float finalX = _hopDistance;
-
-            Vector3 finalForward = Context.CurrentLimb.transform.forward * finalX;
-            Context.Position = new Vector3(_originalPos.x + finalForward.x, _originalPos.y + finalY, _originalPos.z + finalForward.z);
+            Context.AppliedMovement = Vector3.zero;
         }
 
         public override void ExitState()

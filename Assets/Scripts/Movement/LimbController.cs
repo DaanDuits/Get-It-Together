@@ -13,6 +13,7 @@ namespace Ignite.Movement
     public class LimbController : MonoBehaviour
     {
         [SerializeField] private ELimbType type;
+        [SerializeField] private GameObject visualObject;
         private CharacterController _characterController;
 
         private void Awake()
@@ -24,5 +25,7 @@ namespace Ignite.Movement
         { get => type; }
         public CharacterController Controller
         { get => _characterController; }
+        public GameObject VisualObject
+        { get => visualObject; }
     }
 }

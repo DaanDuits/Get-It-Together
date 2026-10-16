@@ -1818,6 +1818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.LimbController
   type: 1
+  visualObject: {fileID: 0}
 --- !u!143 &228788138
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10562,6 +10563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.LimbController
   type: 1
+  visualObject: {fileID: 0}
 --- !u!143 &620317352
 CharacterController:
   m_ObjectHideFlags: 0
@@ -14897,6 +14899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.LimbController
   type: 2
+  visualObject: {fileID: 7336871859726433230}
 --- !u!143 &1035043907
 CharacterController:
   m_ObjectHideFlags: 0
@@ -17255,6 +17258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.LimbController
   type: 0
+  visualObject: {fileID: 0}
 --- !u!1 &1368884806
 GameObject:
   m_ObjectHideFlags: 0
@@ -19409,6 +19413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.LimbController
   type: 2
+  visualObject: {fileID: 1541775828828895322}
 --- !u!143 &1801668088
 CharacterController:
   m_ObjectHideFlags: 0
@@ -21643,15 +21648,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148502478584}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.02120412, z: 0, w: 0.9997752}
-  m_LocalPosition: {x: 3.48, y: 0.343, z: 13.16}
+  m_LocalRotation: {x: -0, y: -0.34889597, z: -0, w: 0.93716145}
+  m_LocalPosition: {x: 3.5567827, y: 0.343, z: 13.091515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6841844461014970777}
   - {fileID: 5623723383186172482}
   m_Father: {fileID: 250292833}
-  m_LocalEulerAnglesHint: {x: 0, y: -2.43, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -40.84, z: 0}
 --- !u!4 &543450653644563209
 Transform:
   m_ObjectHideFlags: 0
@@ -22229,7 +22234,7 @@ Transform:
   m_GameObject: {fileID: 8611879504668297953}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.63, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []

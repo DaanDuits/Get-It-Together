@@ -133,7 +133,7 @@ namespace Ignite.Movement
         private void Update()
         {
             _currentState.UpdateStates();
-
+            
             _currentLimb.Controller.Move(_appliedMovement * Time.deltaTime);
 
             camera.transform.position = _cameraPosition;

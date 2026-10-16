@@ -17,9 +17,7 @@ namespace Ignite.Movement.States
         public override void UpdateState()
         {
             if (!Context.IsMoving)
-            {
                 Context.Rotation = Quaternion.AngleAxis(Context.CameraRotation.eulerAngles.y, Vector3.up);
-            }  
             
             if (!IsCurrentSuperState(Context.CurrentState))
                 return;
@@ -38,7 +36,9 @@ namespace Ignite.Movement.States
             Context.CameraPosition = Context.Position + Context.CameraRotation * new Vector3(0, 0, Context.Radius);
         }
         public override void ExitState()
-        { }
+        {
+            Context.AppliedMovement = Vector3.zero;
+        }
         public override void CheckSwitchStates()
         { }
     }
