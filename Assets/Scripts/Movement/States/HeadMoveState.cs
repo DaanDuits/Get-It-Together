@@ -39,7 +39,5 @@ namespace Ignite.Movement.States
         {
             Context.AppliedMovement = Vector3.zero;
         }
-        public override void CheckSwitchStates()
-        { }
     }
 }

@@ -14,17 +14,16 @@ namespace Ignite.Movement
     {
         [SerializeField] private ELimbType type;
         [SerializeField] private GameObject visualObject;
-        private CharacterController _characterController;
 
         private void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            Controller = GetComponent<CharacterController>();
         }
 
         public ELimbType Type
         { get => type; }
         public CharacterController Controller
-        { get => _characterController; }
+        { get; private set; }
         public GameObject VisualObject
         { get => visualObject; }
     }

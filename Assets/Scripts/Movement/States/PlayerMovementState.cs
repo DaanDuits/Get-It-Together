@@ -27,7 +27,8 @@ namespace Ignite.Movement.States
         public abstract void EnterState();
         public abstract void UpdateState();
         public abstract void ExitState(); 
-        public abstract void CheckSwitchStates();
+        public virtual void CheckSwitchStates() 
+        { }
 
         public void UpdateStates()
         {

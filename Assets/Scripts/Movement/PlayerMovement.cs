@@ -130,11 +130,12 @@ namespace Ignite.Movement
         {
             Ray ray = camera.ScreenPointToRay(_mousePos);
 
-            bool canPossess = _isMousePressed && !IsPossessionLocked;
+            if (!_isMousePressed || IsPossessionLocked)
+                return;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer) && canPossess)
+            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer))
                 CurrentLimb = hit.collider.gameObject.GetComponent<LimbController>();
-            else if (canPossess)
+            else
                 CurrentLimb = startLimb;
         }
 
