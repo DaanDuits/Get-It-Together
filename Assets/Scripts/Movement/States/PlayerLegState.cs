@@ -32,7 +32,7 @@ namespace Ignite.Movement.States
             _rotation += Context.MovementInput.x * Context.LegSpeed * Time.deltaTime;
             Context.Rotation = Quaternion.AngleAxis(_rotation, Vector3.up);
 
-            if (Context.SpacePressed && !_jump)
+            if (Context.IsSpacePressed && !_jump)
             {
                 _jump = true;
                 _originalPos = Context.Position;

@@ -19,41 +19,28 @@ namespace Ignite.Movement
         [SerializeField] private LayerMask possessionLayer;
         [Header("Camera Parameters")]
         [SerializeField] private Vector3 camStartPos;
+        [SerializeField] private float _radius = 0.3f;
         [SerializeField] private new Camera camera;
         [SerializeField] private GameObject winScreen;
         [SerializeField] private Material completeMaterial, incompleteMaterial;
 
-        private LimbController _currentLimb;
         private InputMap _inputMap;
 
         private PlayerMovementStateFactory _stateFactory;
-        private PlayerMovementState _currentState;
-
-        private Vector2 _movementInput;
-        private bool _isMoving = false;
-        private Vector2 _mousePos;
 
         private Vector3 _appliedMovement;
 
-        private Vector3 _cameraPosition;
-        private Quaternion _cameraRotation;
-
-        private float _radius = 0.3f;
-
+        private Vector2 _mousePos;
         private bool _mousePressed = false;
-        private bool _spacePressed = false;
 
         private int _winCounter = 0;
 
         public AnimationCurve LegHopCurve
         { get => legHopCurve; }
         public LimbController CurrentLimb
-        { get => _currentLimb; }
+        { get; private set; }
         public PlayerMovementState CurrentState
-        {
-            get => _currentState;
-            set => _currentState = value; 
-        }
+        { get; set; }
         public float RollSpeed
         { get => rollSpeed; }
         public float LegSpeed
@@ -63,9 +50,9 @@ namespace Ignite.Movement
         public Vector3 CamStartPos
         { get => camStartPos; }
         public Vector2 MovementInput
-        { get => _movementInput; }
+        { get; private set; }
         public bool IsMoving
-        { get => _isMoving; }
+        { get; private set; }
         public Vector3 AppliedMovement
         {
             get => _appliedMovement;
@@ -83,38 +70,37 @@ namespace Ignite.Movement
         }
         public Vector3 Position
         { 
-            get => _currentLimb.transform.position; 
-            set => _currentLimb.transform.position = value;
+            get => CurrentLimb.transform.position; 
+            set => CurrentLimb.transform.position = value;
         }
         public Quaternion Rotation
         { 
-            get => _currentLimb.transform.rotation; 
-            set => _currentLimb.transform.rotation = value;
+            get => CurrentLimb.transform.rotation; 
+            set => CurrentLimb.transform.rotation = value;
         }
         public Vector3 CameraPosition
-        { set => _cameraPosition = value; }
+        { private get; set; }
         public Quaternion CameraRotation
-        {
-            get => _cameraRotation;
-            set => _cameraRotation = value;
-        }
+        { get; set; }
         public float Radius
         { get => _radius; }
-        public bool SpacePressed
-        { get => _spacePressed; }
+        public bool IsSpacePressed
+        { get; private set; }
+        public bool IsPossessionLocked
+        { get; private set; }
 
         private void Awake()
         {
             if (camera == null)
                 camera = Camera.main;
 
-            _currentLimb = startLimb;
+            CurrentLimb = startLimb;
             _stateFactory = new PlayerMovementStateFactory(this);
 
-            _cameraPosition = _currentLimb.transform.position + camStartPos;
+            CameraPosition = CurrentLimb.transform.position + camStartPos;
 
-            _currentState = _stateFactory.HeadState();
-            _currentState.EnterState();
+            CurrentState = _stateFactory.HeadState();
+            CurrentState.EnterState();
         }
 
         private void OnEnable()
@@ -132,12 +118,12 @@ namespace Ignite.Movement
 
         private void Update()
         {
-            _currentState.UpdateStates();
+            CurrentState.UpdateStates();
             
-            _currentLimb.Controller.Move(_appliedMovement * Time.deltaTime);
+            CurrentLimb.Controller.Move(_appliedMovement * Time.deltaTime);
 
-            camera.transform.position = _cameraPosition;
-            camera.transform.rotation = _cameraRotation;
+            camera.transform.position = CameraPosition;
+            camera.transform.rotation = CameraRotation;
         }
 
         private void FixedUpdate()
@@ -145,9 +131,9 @@ namespace Ignite.Movement
             Ray ray = camera.ScreenPointToRay(_mousePos);
 
             if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer) && _mousePressed)
-                _currentLimb = hit.collider.gameObject.GetComponent<LimbController>();
+                CurrentLimb = hit.collider.gameObject.GetComponent<LimbController>();
             else if (_mousePressed)
-                _currentLimb = startLimb;
+                CurrentLimb = startLimb;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -158,9 +144,9 @@ namespace Ignite.Movement
             if (_winCounter == 5)
                 winScreen.SetActive(true);
 
-            if (_currentLimb.GetComponentInChildren<SkinnedMeshRenderer>() == null)
+            if (CurrentLimb.GetComponentInChildren<SkinnedMeshRenderer>() == null)
                 return;
-            _currentLimb.GetComponentInChildren<SkinnedMeshRenderer>().material = completeMaterial;
+            CurrentLimb.GetComponentInChildren<SkinnedMeshRenderer>().material = completeMaterial;
         }
 
         private void OnTriggerExit(Collider other)
@@ -168,15 +154,15 @@ namespace Ignite.Movement
             if ((LayerMask.GetMask("Limb") & (1 << other.gameObject.layer)) > 0)
                 _winCounter--;
 
-            if (_currentLimb.GetComponentInChildren<SkinnedMeshRenderer>() == null)
+            if (CurrentLimb.GetComponentInChildren<SkinnedMeshRenderer>() == null)
                 return;
-            _currentLimb.GetComponentInChildren<SkinnedMeshRenderer>().material = incompleteMaterial;
+            CurrentLimb.GetComponentInChildren<SkinnedMeshRenderer>().material = incompleteMaterial;
         }
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            _movementInput = context.ReadValue<Vector2>();
-            _isMoving = MovementInput.x != 0f || MovementInput.y != 0f;
+            MovementInput = context.ReadValue<Vector2>();
+            IsMoving = MovementInput.x != 0f || MovementInput.y != 0f;
         }
         public void OnMousePos(InputAction.CallbackContext context)
         {
@@ -194,9 +180,9 @@ namespace Ignite.Movement
         public void OnSpacePressed(InputAction.CallbackContext context)
         {
             if (context.started)
-                _spacePressed = true;
+                IsSpacePressed = true;
             if (context.canceled)
-                _spacePressed = false;
+                IsSpacePressed = false;
         }
     }
 }
