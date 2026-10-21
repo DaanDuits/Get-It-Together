@@ -6,12 +6,31 @@ using Ignite.Movement.States.Factory;
 
 namespace Ignite.Movement
 {
+    public struct LegHopData
+    {
+        public float distance;
+        public float height;
+        public float direction;
+
+        public LegHopData(float distance, float height, float direction)
+        {
+            this.distance = distance;
+            this.height = height;
+            this.direction = direction;
+        }
+    }
+
     public class PlayerMovement : MonoBehaviour, InputMap.IPlayerActions
     {
         [Header("Movement Parameters")]
         [SerializeField] private float rollSpeed = 1.5f;
-        [SerializeField] private float legSpeed = 2f;
+        [Space]
+        [SerializeField] private float legRotationSpeed = 0.8f;
+        [SerializeField] private float legChargeSpeed = 2f;
+        [SerializeField] private Vector2 legHopHeightMinMax = new Vector2(0.2f, 0.8f);
+        [SerializeField] private Vector2 legHopDistanceMinMax = new Vector2(0.5f, 1.5f);
         [SerializeField] private AnimationCurve legHopCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0f, 0f), new Keyframe(0.5f, 1f), new Keyframe(1f, 0f) });
+        [Space]
         [SerializeField] private float armSpeed = 1f;
         [Header("Possession Parameters")]
         [SerializeField] private LimbController startLimb;
@@ -43,8 +62,16 @@ namespace Ignite.Movement
         { get; set; }
         public float RollSpeed
         { get => rollSpeed; }
-        public float LegSpeed
-        { get => legSpeed; }
+        public float LegRotationSpeed
+        { get => legRotationSpeed; }
+        public float LegChargeSpeed
+        { get => legChargeSpeed; }
+        public Vector2 LegHopHeightMinMax
+        {  get => legHopHeightMinMax; }
+        public Vector2 LegHopDistanceMinMax
+        { get => legHopDistanceMinMax; }
+        public LegHopData LegHopData
+        { get; set; }
         public float ArmSpeed
         { get => armSpeed; }
         public Vector3 CamStartPos

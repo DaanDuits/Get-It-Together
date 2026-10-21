@@ -1,13 +1,11 @@
-using Ignite.Movement.States.Factory;
 using UnityEngine;
+using Ignite.Movement.States.Factory;
 
 namespace Ignite.Movement.States
 {
     public class LegHopState : PlayerMovementState
     {
         float _timer;
-        private float _hopDistance = 1.5f;
-        private float _maxHeight = 2f;
 
         public LegHopState(PlayerMovement context, PlayerMovementStateFactory factory) : base(context, factory)
         { }
@@ -24,8 +22,8 @@ namespace Ignite.Movement.States
                 return;
             }
 
-            float y = Context.LegHopCurve.Evaluate(_timer) * _maxHeight;
-            float x = _hopDistance / 1f;
+            float y = Context.LegHopCurve.Evaluate(_timer) * Context.LegHopData.height;
+            float x = Context.LegHopData.distance / 1f * Context.LegHopData.direction;
 
             Vector3 forward = Context.CurrentLimb.transform.forward.normalized;
             Context.AppliedMovement = new Vector3(forward.x * x, 0, forward.z * x);

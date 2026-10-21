@@ -1,5 +1,5 @@
-using Ignite.Movement.States.Factory;
 using UnityEngine;
+using Ignite.Movement.States.Factory;
 
 namespace Ignite.Movement.States
 {
@@ -16,13 +16,13 @@ namespace Ignite.Movement.States
         }
         public override void UpdateState()
         {
-            _rotation += Context.MovementInput.x * Context.LegSpeed * Time.deltaTime;
+            _rotation += Context.MovementInput.x * Context.LegRotationSpeed * 360 * Time.deltaTime;
             Context.Rotation = Quaternion.AngleAxis(_rotation, Vector3.up);
 
             if (Context.IsSpacePressed)
             {
                 Context.IsPossessionLocked = true;
-                SwitchState(Factory.LegHopState());
+                SwitchState(Factory.LegChargeState());
             }
         }
         public override void ExitState()
