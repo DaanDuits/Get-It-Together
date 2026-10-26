@@ -126,7 +126,6 @@ namespace Ignite.Movement
 
             CameraPosition = CurrentLimb.transform.position + camStartPos;
 
-            CurrentState = _stateFactory.HeadState();
             CurrentState.EnterState();
         }
 

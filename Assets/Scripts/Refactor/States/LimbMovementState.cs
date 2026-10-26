@@ -4,12 +4,23 @@ namespace Ignite
 {
     public abstract class LimbMovementState
     {
-        protected LimbStateController Context
-        { get; private set; }
+        private ILimbController _root;
 
-        public LimbMovementState(LimbStateController context)
+        public LimbMovementState(ILimbController root)
         {
-            Context = context;
+            _root = root;
+        }
+
+        public abstract void EnterState();
+        public abstract void UpdateState();
+        public abstract void ExitState();
+
+        protected void SwicthState(LimbMovementState newState)
+        {
+            ExitState();
+
+            _root.CurrentState = newState;
+            newState.EnterState();
         }
     }
 }

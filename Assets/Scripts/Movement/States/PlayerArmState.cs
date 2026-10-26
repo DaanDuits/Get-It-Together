@@ -25,8 +25,6 @@ namespace Ignite
         { }
         public override void CheckSwitchStates()
         {
-            if (Context.CurrentLimb.Type == ELimbType.Head)
-                SwitchState(Factory.HeadState());
             if (Context.CurrentLimb.Type == ELimbType.Leg)
                 SwitchState(Factory.LegState());
         }
