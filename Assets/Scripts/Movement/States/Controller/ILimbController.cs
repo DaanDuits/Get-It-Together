@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Ignite
+namespace Ignite.Movement.States.Controller
 {
     public interface ILimbController
     {

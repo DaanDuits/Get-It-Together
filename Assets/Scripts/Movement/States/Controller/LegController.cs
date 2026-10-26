@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ignite
+namespace Ignite.Movement.States.Controller
 {
     [RequireComponent(typeof(CharacterController))]
     public class LegController : InputListener, ILimbController
@@ -17,6 +17,8 @@ namespace Ignite
         private LegIdleState _idleState;
         private LegChargeState _chargeState;
         private LegHopState _hopState;
+
+        private bool _isActive;
 
         public LimbMovementState CurrentState
         { get; set; }
@@ -75,6 +77,8 @@ namespace Ignite
 
         private void Start()
         {
+            _controller = GetComponent<CharacterController>();
+
             RotationY = transform.rotation.eulerAngles.y;
 
             _idleState = new LegIdleState(this);
@@ -82,21 +86,35 @@ namespace Ignite
             _hopState = new LegHopState(this);
         }
 
+        private void Update()
+        {
+            if (_appliedMovement != Vector3.zero && !_isActive)
+            {
+                UpdateLimb();
+            }
+        }
+
         public void EnterLimb()
         {
             CurrentState = _idleState;
+            CurrentState.EnterState();
+
+            _isActive = true;
         }
         public void UpdateLimb()
         {
             CurrentState.UpdateState();
 
             IsCharging = InputMap.Player.Charge.ReadValue<float>() == 1f;
+            MoveInput = InputMap.Player.Move.ReadValue<Vector2>();
 
             _controller.Move(_appliedMovement * Time.deltaTime);
             transform.rotation = Quaternion.AngleAxis(RotationY, Vector3.up);
         }
         public void ExitLimb()
-        { }
+        { 
+            _isActive = false;
+        }
 
     }
 }

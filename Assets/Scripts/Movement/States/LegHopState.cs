@@ -1,44 +1,47 @@
 using UnityEngine;
-using Ignite.Movement.States.Factory;
+using Ignite.Movement.States.Controller;
 
 namespace Ignite.Movement.States
 {
-    public class LegHopState : PlayerMovementState
+    public class LegHopState : LimbMovementState
     {
-        float _timer;
+        private LegController _context;
 
-        public LegHopState(PlayerMovement context, PlayerMovementStateFactory factory) : base(context, factory)
-        { }
+        private float _timer;
+
+        private float _height, _distance;
+
+        public LegHopState(LegController context) : base(context)
+        {
+            _context = context;
+        }
 
         public override void EnterState()
         {
+            _height = Mathf.Lerp(_context.HopHeightRange.x, _context.HopHeightRange.y, _context.HopStrength);
+            _distance = Mathf.Lerp(_context.HopDistanceRange.x, _context.HopDistanceRange.y, _context.HopStrength);
+
             _timer = 0f;
         }
         public override void UpdateState()
         {
             if (_timer == 1f)
             {
-                SwitchState(Factory.LegIdleState());
+                SwitchState(_context.IdleState);
                 return;
             }
 
-            float y = Context.LegHopCurve.Evaluate(_timer) * Context.LegHopData.height;
-            float x = Context.LegHopData.distance / 1f * Context.LegHopData.direction;
+            float y = 4f * (_height - 0f) * _timer * (1f - _timer) + 0f;
+            float x = _distance / 1f * _context.HopDirection;
 
-            Vector3 forward = Context.CurrentLimb.transform.forward.normalized;
-            Context.AppliedMovement = new Vector3(forward.x * x, 0, forward.z * x);
-
-            Vector3 visualPos = new Vector3(Context.Position.x, Context.Position.y + y, Context.Position.z);
-            Context.CurrentLimb.VisualObject.transform.position = visualPos;
+            _context.AppliedMovement = new Vector3(_context.Forward.x * x, 0, _context.Forward.z * x);
+            _context.VisualPosition = new Vector3(0, y, 0);
 
             _timer = Mathf.Clamp01(_timer + Time.deltaTime);
         }
         public override void ExitState()
         {
-            Context.AppliedMovement = Vector3.zero;
-            Context.IsPossessionLocked = false;
+            _context.AppliedMovement = Vector3.zero;
         }
-        public override void CheckSwitchStates()
-        { }
     }
 }

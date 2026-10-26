@@ -1,29 +1,25 @@
 using UnityEngine;
-using Ignite.Movement.States.Factory;
+using Ignite.Movement.States.Controller;
 
 namespace Ignite.Movement.States
 {
-    public class LegIdleState : PlayerMovementState
+    public class LegIdleState : LimbMovementState
     {
-        private float _rotation; 
+        private LegController _context;
 
-        public LegIdleState(PlayerMovement context, PlayerMovementStateFactory factory) : base(context, factory)
-        { }
+        public LegIdleState(LegController context) : base(context)
+        {
+            _context = context;
+        }
 
         public override void EnterState()
-        {
-            _rotation = Context.Rotation.eulerAngles.y;
-        }
+        { }
         public override void UpdateState()
         {
-            _rotation += Context.MovementInput.x * Context.LegRotationSpeed * 360 * Time.deltaTime;
-            Context.Rotation = Quaternion.AngleAxis(_rotation, Vector3.up);
+            _context.RotationY += _context.MoveInput.x * _context.TurnSpeed * 360f * Time.deltaTime;
 
-            if (Context.IsSpacePressed)
-            {
-                Context.IsPossessionLocked = true;
-                SwitchState(Factory.LegChargeState());
-            }
+            if (_context.IsCharging)
+                SwitchState(_context.ChargeState);
         }
         public override void ExitState()
         { }

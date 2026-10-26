@@ -1,6 +1,7 @@
 using UnityEngine;
+using Ignite.Movement.States.Controller;
 
-namespace Ignite
+namespace Ignite.Movement.States
 {
     public class HeadRollState : LimbMovementState
     {

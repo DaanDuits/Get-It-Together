@@ -1,7 +1,6 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Ignite
+namespace Ignite.Movement.States.Controller
 {
     [RequireComponent(typeof(CharacterController))]
     public class HeadController : InputListener, ILimbController
@@ -60,18 +59,6 @@ namespace Ignite
             CameraRotation = camera.rotation;
 
             _controller = GetComponent<CharacterController>();
-        }
-
-        private void Update()
-        {
-            CurrentState.UpdateState();
-
-            _controller.Move(_appliedMovement * Time.deltaTime * rollSpeed);
-
-            camera.position = CameraPosition;
-            camera.rotation = CameraRotation;
-
-            MoveInput = InputMap.Player.Move.ReadValue<Vector2>();
         }
 
         public void EnterLimb()

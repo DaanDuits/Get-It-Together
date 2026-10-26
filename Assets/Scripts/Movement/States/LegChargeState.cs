@@ -1,13 +1,17 @@
 using UnityEngine;
-using Ignite.Movement.States.Factory;
+using Ignite.Movement.States.Controller;
 
 namespace Ignite.Movement.States
 {
-    public class LegChargeState : PlayerMovementState
+    public class LegChargeState : LimbMovementState
     {
-        float _timer;
-        public LegChargeState(PlayerMovement context, PlayerMovementStateFactory factory) : base(context, factory)
-        { }
+        private LegController _context;
+        private float _timer;
+
+        public LegChargeState(LegController context) : base(context)
+        {
+            _context = context;
+        }
 
         public override void EnterState()
         {
@@ -15,21 +19,18 @@ namespace Ignite.Movement.States
         }
         public override void UpdateState()
         {
-            if (!Context.IsSpacePressed && Context.MovementInput.y != 0)
+            if (!_context.IsCharging && _context.MoveInput.y != 0f)
             {
-                float ratio = _timer / Context.LegChargeSpeed;
-                float hopHeight = Mathf.Lerp(Context.LegHopHeightMinMax.x, Context.LegHopHeightMinMax.y, ratio);
-                float hopDistance = Mathf.Lerp(Context.LegHopDistanceMinMax.x, Context.LegHopDistanceMinMax.y, ratio);
-
-                Context.LegHopData = new LegHopData(hopDistance, hopHeight, Context.MovementInput.y);
-                SwitchState(Factory.LegHopState());
+                _context.HopStrength = _timer / _context.ChargeDuration;
+                _context.HopDirection = _context.MoveInput.y;
+                SwitchState(_context.HopState);
             }
-            else if (!Context.IsSpacePressed && Context.MovementInput.y == 0)
+            else if (!_context.IsCharging && _context.MoveInput.y == 0f)
             {
-                SwitchState(Factory.LegIdleState());
+                SwitchState(_context.IdleState);
             }
 
-            _timer = Mathf.Clamp(_timer + Time.deltaTime, 0f, Context.LegChargeSpeed);
+            _timer = Mathf.Clamp(_timer + Time.deltaTime, 0f, _context.ChargeDuration);
         }
         public override void ExitState()
         { }
