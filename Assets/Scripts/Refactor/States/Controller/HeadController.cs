@@ -39,7 +39,10 @@ namespace Ignite
         public Vector3 Position
         { get => transform.position; }
         public Quaternion Rotation
-        { get; set; }
+        { 
+            get => transform.rotation; 
+            set => transform.rotation = value; 
+        }
 
         public Vector3 CameraPosition
         { get; set; }

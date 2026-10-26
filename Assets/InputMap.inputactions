@@ -28,22 +28,22 @@
                 },
                 {
                     "name": "MousePressed",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "1d039c50-3718-4cde-a021-e1eece47a0ec",
-                    "expectedControlType": "",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false,
+                    "initialStateCheck": true,
                     "priority": 0
                 },
                 {
-                    "name": "SpacePressed",
-                    "type": "Button",
+                    "name": "Charge",
+                    "type": "Value",
                     "id": "19122387-94a5-46a3-94f5-634be52f0e17",
-                    "expectedControlType": "",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false,
+                    "initialStateCheck": true,
                     "priority": 0
                 }
             ],
@@ -176,7 +176,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "SpacePressed",
+                    "action": "Charge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

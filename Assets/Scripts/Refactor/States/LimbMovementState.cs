@@ -15,7 +15,7 @@ namespace Ignite
         public abstract void UpdateState();
         public abstract void ExitState();
 
-        protected void SwicthState(LimbMovementState newState)
+        protected void SwitchState(LimbMovementState newState)
         {
             ExitState();
 

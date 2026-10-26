@@ -116,22 +116,22 @@ namespace Ignite.Input
                 },
                 {
                     ""name"": ""MousePressed"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""1d039c50-3718-4cde-a021-e1eece47a0ec"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false,
+                    ""initialStateCheck"": true,
                     ""priority"": 0
                 },
                 {
-                    ""name"": ""SpacePressed"",
-                    ""type"": ""Button"",
+                    ""name"": ""Charge"",
+                    ""type"": ""Value"",
                     ""id"": ""19122387-94a5-46a3-94f5-634be52f0e17"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Analog"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false,
+                    ""initialStateCheck"": true,
                     ""priority"": 0
                 }
             ],
@@ -264,7 +264,7 @@ namespace Ignite.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""SpacePressed"",
+                    ""action"": ""Charge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -339,7 +339,7 @@ namespace Ignite.Input
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
             m_Player_MousePressed = m_Player.FindAction("MousePressed", throwIfNotFound: true);
-            m_Player_SpacePressed = m_Player.FindAction("SpacePressed", throwIfNotFound: true);
+            m_Player_Charge = m_Player.FindAction("Charge", throwIfNotFound: true);
         }
 
         ~@InputMap()
@@ -423,7 +423,7 @@ namespace Ignite.Input
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_MousePos;
         private readonly InputAction m_Player_MousePressed;
-        private readonly InputAction m_Player_SpacePressed;
+        private readonly InputAction m_Player_Charge;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -448,9 +448,9 @@ namespace Ignite.Input
             /// </summary>
             public InputAction @MousePressed => m_Wrapper.m_Player_MousePressed;
             /// <summary>
-            /// Provides access to the underlying input action "Player/SpacePressed".
+            /// Provides access to the underlying input action "Player/Charge".
             /// </summary>
-            public InputAction @SpacePressed => m_Wrapper.m_Player_SpacePressed;
+            public InputAction @Charge => m_Wrapper.m_Player_Charge;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -486,9 +486,9 @@ namespace Ignite.Input
                 @MousePressed.started += instance.OnMousePressed;
                 @MousePressed.performed += instance.OnMousePressed;
                 @MousePressed.canceled += instance.OnMousePressed;
-                @SpacePressed.started += instance.OnSpacePressed;
-                @SpacePressed.performed += instance.OnSpacePressed;
-                @SpacePressed.canceled += instance.OnSpacePressed;
+                @Charge.started += instance.OnCharge;
+                @Charge.performed += instance.OnCharge;
+                @Charge.canceled += instance.OnCharge;
             }
 
             /// <summary>
@@ -509,9 +509,9 @@ namespace Ignite.Input
                 @MousePressed.started -= instance.OnMousePressed;
                 @MousePressed.performed -= instance.OnMousePressed;
                 @MousePressed.canceled -= instance.OnMousePressed;
-                @SpacePressed.started -= instance.OnSpacePressed;
-                @SpacePressed.performed -= instance.OnSpacePressed;
-                @SpacePressed.canceled -= instance.OnSpacePressed;
+                @Charge.started -= instance.OnCharge;
+                @Charge.performed -= instance.OnCharge;
+                @Charge.canceled -= instance.OnCharge;
             }
 
             /// <summary>
@@ -639,12 +639,12 @@ namespace Ignite.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMousePressed(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "SpacePressed" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "Charge" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnSpacePressed(InputAction.CallbackContext context);
+            void OnCharge(InputAction.CallbackContext context);
         }
     }
 }

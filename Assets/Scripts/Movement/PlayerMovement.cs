@@ -206,7 +206,7 @@ namespace Ignite.Movement
                 _isMousePressed = false;
         }
 
-        public void OnSpacePressed(InputAction.CallbackContext context)
+        public void OnCharge(InputAction.CallbackContext context)
         {
             if (context.started)
                 IsSpacePressed = true;
