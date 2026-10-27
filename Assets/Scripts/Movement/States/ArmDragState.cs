@@ -23,7 +23,6 @@ namespace Ignite.Movement.States
 
             float dist = (pos - target).magnitude;
 
-            Debug.Log(dist <= _context.ReachDistanceRange.x || !_context.IsDragging);
             if (dist <= _context.ReachDistanceRange.x || !_context.IsDragging || _context.MoveInput.x != 0f)
             {
                 SwitchState(_context.IdleState);
