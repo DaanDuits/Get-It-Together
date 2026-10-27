@@ -133,6 +133,16 @@ namespace Ignite.Input
                     ""interactions"": """",
                     ""initialStateCheck"": true,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""45737a86-6615-439b-8926-f5e44f8cfdc2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -267,6 +277,17 @@ namespace Ignite.Input
                     ""action"": ""Charge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c177c47e-afd2-4716-8246-c3ec85371ea1"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -340,6 +361,7 @@ namespace Ignite.Input
             m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
             m_Player_MousePressed = m_Player.FindAction("MousePressed", throwIfNotFound: true);
             m_Player_Charge = m_Player.FindAction("Charge", throwIfNotFound: true);
+            m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
         }
 
         ~@InputMap()
@@ -424,6 +446,7 @@ namespace Ignite.Input
         private readonly InputAction m_Player_MousePos;
         private readonly InputAction m_Player_MousePressed;
         private readonly InputAction m_Player_Charge;
+        private readonly InputAction m_Player_Submit;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -451,6 +474,10 @@ namespace Ignite.Input
             /// Provides access to the underlying input action "Player/Charge".
             /// </summary>
             public InputAction @Charge => m_Wrapper.m_Player_Charge;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Submit".
+            /// </summary>
+            public InputAction @Submit => m_Wrapper.m_Player_Submit;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -489,6 +516,9 @@ namespace Ignite.Input
                 @Charge.started += instance.OnCharge;
                 @Charge.performed += instance.OnCharge;
                 @Charge.canceled += instance.OnCharge;
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
             }
 
             /// <summary>
@@ -512,6 +542,9 @@ namespace Ignite.Input
                 @Charge.started -= instance.OnCharge;
                 @Charge.performed -= instance.OnCharge;
                 @Charge.canceled -= instance.OnCharge;
+                @Submit.started -= instance.OnSubmit;
+                @Submit.performed -= instance.OnSubmit;
+                @Submit.canceled -= instance.OnSubmit;
             }
 
             /// <summary>
@@ -645,6 +678,13 @@ namespace Ignite.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnCharge(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Submit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSubmit(InputAction.CallbackContext context);
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Ignite.Movement.States.Controller
 {
     [RequireComponent(typeof(CharacterController))]
-    public class HeadController : InputListener, ILimbController
+    public class HeadController : MonoBehaviour, ILimbController
     {
         [SerializeField] private float radius;
         [SerializeField] private float rollSpeed;
@@ -18,6 +18,8 @@ namespace Ignite.Movement.States.Controller
 
         public float Radius
         { get => radius; }
+        public float RollSpeed
+        { get => rollSpeed; }
         public float AppliedMovementX
         {
             get => _appliedMovement.x;
@@ -65,16 +67,23 @@ namespace Ignite.Movement.States.Controller
         { }
         public void UpdateLimb()
         {
+            if (!enabled)
+                return;
             CurrentState.UpdateState();
 
-            _controller.Move(_appliedMovement * Time.deltaTime * rollSpeed);
+            _controller.Move(_appliedMovement * Time.deltaTime);
 
             camera.position = CameraPosition;
             camera.rotation = CameraRotation;
 
-            MoveInput = InputMap.Player.Move.ReadValue<Vector2>();
+            MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
         }
         public void ExitLimb()
         { }
+
+        public void Lock()
+        {
+            enabled = false;
+        }
     }
 }

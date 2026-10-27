@@ -8,5 +8,7 @@ namespace Ignite.Movement.States.Controller
         public void EnterLimb();
         public void UpdateLimb();
         public void ExitLimb();
+
+        public void Lock();
     }
 }

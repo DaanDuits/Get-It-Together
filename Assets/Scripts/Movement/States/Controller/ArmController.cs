@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Ignite.Movement.States.Controller
 {
     [RequireComponent(typeof(CharacterController))]
-    public class ArmController : InputListener, ILimbController
+    public class ArmController : MonoBehaviour, ILimbController
     {
         [SerializeField] private float turnSpeed = 0.2f;
         [SerializeField] private float dragSpeed = 0.4f;
@@ -84,10 +84,12 @@ namespace Ignite.Movement.States.Controller
         }
         public void UpdateLimb()
         {
+            if (!enabled)
+                return;
             CurrentState.UpdateState();
 
-            MoveInput = InputMap.Player.Move.ReadValue<Vector2>();
-            IsDragging = InputMap.Player.Charge.ReadValue<float>() > 0f;
+            MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
+            IsDragging = GameManager.Instance.InputMap.Player.Charge.ReadValue<float>() > 0f;
             Rotation = Quaternion.AngleAxis(RotationY, Vector3.up);
 
             if (MoveInput.x == 0)
@@ -95,5 +97,10 @@ namespace Ignite.Movement.States.Controller
         }
         public void ExitLimb()
         { }
+
+        public void Lock()
+        {
+            enabled = false;
+        }
     }
 }

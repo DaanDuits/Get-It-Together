@@ -3,7 +3,7 @@ using Ignite.Movement.States.Controller;
 
 namespace Ignite.Movement
 {
-    public class PossessionController : InputListener
+    public class PossessionController : MonoBehaviour
     {
         [SerializeField] private float possessionDistance = 5f;
         [SerializeField] private LayerMask possessionLayer;
@@ -31,9 +31,9 @@ namespace Ignite.Movement
 
         private void FixedUpdate()
         {
-            Ray ray = camera.ScreenPointToRay(InputMap.Player.MousePos.ReadValue<Vector2>());
+            Ray ray = camera.ScreenPointToRay(GameManager.Instance.InputMap.Player.MousePos.ReadValue<Vector2>());
 
-            if (InputMap.Player.MousePressed.ReadValue<float>() == 0f)
+            if (GameManager.Instance.InputMap.Player.MousePressed.ReadValue<float>() == 0f)
                 return;
 
             _currentLimb.ExitLimb();

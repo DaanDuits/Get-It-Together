@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Ignite.Movement.States.Controller
 {
     [RequireComponent(typeof(CharacterController))]
-    public class LegController : InputListener, ILimbController
+    public class LegController : MonoBehaviour, ILimbController
     {
         [SerializeField] private float turnSpeed = 0.4f;
         [SerializeField] private float chargeDuration = 1f;
@@ -103,10 +103,12 @@ namespace Ignite.Movement.States.Controller
         }
         public void UpdateLimb()
         {
+            if (!enabled)
+                return;
             CurrentState.UpdateState();
 
-            IsCharging = InputMap.Player.Charge.ReadValue<float>() == 1f;
-            MoveInput = InputMap.Player.Move.ReadValue<Vector2>();
+            IsCharging = GameManager.Instance.InputMap.Player.Charge.ReadValue<float>() == 1f;
+            MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
 
             _controller.Move(_appliedMovement * Time.deltaTime);
             transform.rotation = Quaternion.AngleAxis(RotationY, Vector3.up);
@@ -116,5 +118,9 @@ namespace Ignite.Movement.States.Controller
             _isActive = false;
         }
 
+        public void Lock()
+        {
+            enabled = false;
+        }
     }
 }
