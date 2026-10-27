@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Style/WinScreen.uss?fileID=7433441132597879392&amp;guid=9fedaee0a03ec75419a38a795e6ae64b&amp;type=3#WinScreen"/>
+    <ui:VisualElement class="content-holder">
+        <ui:Label text="You got yourself back together!" class="title"/>
+        <ui:Button text="Main Menu" name="main-menu-button" class="button"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -55,6 +55,8 @@ namespace Ignite.Movement.States.Controller
             if (camera == null)
                 camera = Camera.main.transform;
 
+            camera.position = transform.position + transform.forward * radius;
+
             CurrentState = new HeadRollState(this);
 
             CameraPosition = camera.position;

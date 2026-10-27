@@ -1,11 +1,13 @@
-using Ignite.Input;
 using UnityEngine;
+using Ignite.Input;
+using Ignite.UI;
 
 namespace Ignite
 {
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private int winCondition = 5;
+        [SerializeField] private WinScreenUI winScreen;
 
         private int _winCounter;
         private InputMap _inputMap;
@@ -40,7 +42,7 @@ namespace Ignite
 
             if (_winCounter == winCondition)
             {
-                Debug.Log("Win!");
+                winScreen.Enable();
             }
         }
 

@@ -2110,6 +2110,7 @@ Transform:
   - {fileID: 7903418344233140188}
   - {fileID: 6246233535884647049}
   - {fileID: 1339218152}
+  - {fileID: 1613156683}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &268199588
@@ -11650,7 +11651,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 250292833}
     m_Modifications:
     - target: {fileID: 706854438757938220, guid: f5d6e9102c2e0204db53e54a903f3ecc, type: 3}
       propertyPath: m_Name
@@ -11701,7 +11702,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5d6e9102c2e0204db53e54a903f3ecc, type: 3}
---- !u!1 &1428421253
+--- !u!1 &1436830451
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11709,69 +11710,58 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1428421256}
-  - component: {fileID: 1428421255}
-  - component: {fileID: 1428421254}
+  - component: {fileID: 1436830454}
+  - component: {fileID: 1436830453}
+  - component: {fileID: 1436830452}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: WinScreenUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1428421254
+--- !u!114 &1436830452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428421253}
+  m_GameObject: {fileID: 1436830451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Script: {fileID: 11500000, guid: fd77b83e510107f4f8d26167dc777d08, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: -7868457994429288776, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_SubmitAction: {fileID: 0}
-  m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
---- !u!114 &1428421255
+  m_EditorClassIdentifier: Assembly-CSharp::Ignite.UI.WinScreenUI
+--- !u!114 &1436830453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428421253}
+  m_GameObject: {fileID: 1436830451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1428421256
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: acde41fc774066c46827149969ecd173, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 1781c0fcce311a34996787e9e2e64197, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &1436830454
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428421253}
+  m_GameObject: {fileID: 1436830451}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -12314,6 +12304,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!4 &1613156683 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4656554465044819472, guid: f5d6e9102c2e0204db53e54a903f3ecc, type: 3}
+  m_PrefabInstance: {fileID: 1380694684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1618054845
 GameObject:
   m_ObjectHideFlags: 0
@@ -15714,8 +15709,12 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 5813644542266694831, guid: 73f46ba749d2df7458233cdb92dfdd09, type: 3}
+      propertyPath: winScreen
+      value: 
+      objectReference: {fileID: 1436830452}
+    - target: {fileID: 5813644542266694831, guid: 73f46ba749d2df7458233cdb92dfdd09, type: 3}
       propertyPath: winCondition
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7987846436133278707, guid: 73f46ba749d2df7458233cdb92dfdd09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15902,7 +15901,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1643070783}
-  - {fileID: 1380694684}
   - {fileID: 250292833}
-  - {fileID: 1428421256}
   - {fileID: 4264523473404002355}
+  - {fileID: 1436830454}

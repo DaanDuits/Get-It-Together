@@ -1,0 +1,25 @@
+:root {
+}
+
+.holder {
+    align-items: center;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+.button {
+    width: 250px;
+    height: 50px;
+    font-size: 30px;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-size: 60px;
+    -unity-font-style: bold;
+    -unity-text-outline-width: 3px;
+    -unity-text-outline-color: rgb(255, 255, 255);
+    color: rgb(51, 51, 51);
+}
