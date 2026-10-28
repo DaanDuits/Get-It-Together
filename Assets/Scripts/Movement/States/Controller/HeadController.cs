@@ -55,12 +55,10 @@ namespace Ignite.Movement.States.Controller
             if (camera == null)
                 camera = Camera.main.transform;
 
-            camera.position = transform.position + transform.forward * radius;
+            CameraPosition = transform.position + transform.forward * radius;
+            CameraRotation = transform.rotation;
 
             CurrentState = new HeadRollState(this);
-
-            CameraPosition = camera.position;
-            CameraRotation = camera.rotation;
 
             _controller = GetComponent<CharacterController>();
         }
@@ -71,8 +69,10 @@ namespace Ignite.Movement.States.Controller
         {
             if (!enabled)
                 return;
+
             CurrentState.UpdateState();
 
+            Debug.Log(_appliedMovement);
             _controller.Move(_appliedMovement * Time.deltaTime);
 
             camera.position = CameraPosition;

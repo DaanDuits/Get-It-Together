@@ -41,9 +41,7 @@ namespace Ignite
             _winCounter++;
 
             if (_winCounter == winCondition)
-            {
                 winScreen.Enable();
-            }
         }
 
         private void OnEnable()
