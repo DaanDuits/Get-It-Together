@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1053867655843844848, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.76
+      value: -4.69
       objectReference: {fileID: 0}
     - target: {fileID: 1053867655843844848, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
       propertyPath: m_LocalRotation.w
@@ -438,81 +438,61 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 426654080671729738, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1712292007}
+    - targetCorrespondingSourceObject: {fileID: 426654080671729738, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1712292006}
   m_SourcePrefab: {fileID: 100100000, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
---- !u!1 &1995392710
+--- !u!1 &1712292005 stripped
 GameObject:
+  m_CorrespondingSourceObject: {fileID: 426654080671729738, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
+  m_PrefabInstance: {fileID: 1712292004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1712292006
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1995392711}
-  - component: {fileID: 1995392713}
-  - component: {fileID: 1995392712}
-  m_Layer: 0
-  m_Name: MainMenu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1995392711
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995392710}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1995392712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995392710}
+  m_GameObject: {fileID: 1712292005}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a17093578a4c6ae4fa0172d32ea618c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Ignite.UI.MainMenuUI
---- !u!114 &1995392713
-MonoBehaviour:
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 695bed04439b0a14fade824ceeac1312, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!111 &1712292007
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995392710}
+  m_GameObject: {fileID: 1712292005}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: acde41fc774066c46827149969ecd173, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: fc1ee9a4b61bff24986d540e9b476c63, type: 3}
-  m_SortingOrder: 0
-  m_Position: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 78906266}
   - {fileID: 173832002}
-  - {fileID: 1995392711}
   - {fileID: 1712292004}
