@@ -1,16 +1,15 @@
 using System.Net.Http.Headers;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Ignite.Movement.States.Controller
 {
-    [RequireComponent(typeof(CharacterController))]
     public class ArmController : MonoBehaviour, ILimbController
     {
         [SerializeField] private float turnSpeed = 0.2f;
         [SerializeField] private float dragSpeed = 0.4f;
         [SerializeField] private Vector2 reachDistanceRange = new Vector2(0.2f, 0.8f);
-
-        private CharacterController _controller;
+        [SerializeField] private Transform pivot, shoulder;
 
         private Vector3 _appliedMovement;
 
@@ -44,18 +43,33 @@ namespace Ignite.Movement.States.Controller
         public Vector2 MoveInput
         { get; private set; }
         public Vector3 Position
-        { get => transform.position; }
+        { 
+            get => transform.position; 
+            set => transform.position = value;
+        }
         public Vector3 Forward
-        { get => transform.forward; }
+        { get => pivot.forward; }
         public Quaternion Rotation
         { 
-            get => transform.parent.rotation;
-            set => transform.parent.rotation = value; 
+            get => pivot.rotation;
+            set => pivot.rotation = value; 
         }
-        public Vector3 MovePosition
+        public Vector3 Pivot
+        {
+            get => pivot.position;
+            set => pivot.position = value; 
+        }
+        public Vector3 ShoulderPosition
         { 
-            get => transform.parent.position; 
-            set => transform.parent.position = value;
+            get => shoulder.position; 
+            set => shoulder.position = value;
+        }
+        public float Offset
+        {
+            get
+            {
+                return (Position - ShoulderPosition).magnitude;
+            }
         }
         public float RotationY
         { get; set; }
@@ -69,8 +83,6 @@ namespace Ignite.Movement.States.Controller
 
         private void Start()
         {
-            _controller = GetComponent<CharacterController>();
-
             RotationY = Rotation.eulerAngles.y;
 
             _idleState = new ArmIdleState(this);
@@ -91,9 +103,9 @@ namespace Ignite.Movement.States.Controller
             MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
             IsDragging = GameManager.Instance.InputMap.Player.Charge.ReadValue<float>() > 0f;
             Rotation = Quaternion.AngleAxis(RotationY, Vector3.up);
+            shoulder.rotation = Rotation;
 
-            if (MoveInput.x == 0)
-                _controller.Move(_appliedMovement * Time.deltaTime);
+            transform.position += _appliedMovement * Time.deltaTime;
         }
         public void ExitLimb()
         { }

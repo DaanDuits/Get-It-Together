@@ -1,5 +1,6 @@
 using Ignite.Movement.States.Controller;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Ignite.Movement.States
 {
@@ -18,7 +19,7 @@ namespace Ignite.Movement.States
         {
             Vector3 pos = _context.Position;
             pos.y = 0f;
-            Vector3 target = _context.MovePosition;
+            Vector3 target = _context.ShoulderPosition;
             target.y = 0f;
 
             float dist = (pos - target).magnitude;
@@ -28,7 +29,7 @@ namespace Ignite.Movement.States
                 SwitchState(_context.IdleState);
                 return;
             }
-            _context.MovePosition += _context.Forward * Time.deltaTime * _context.DragSpeed;
+            _context.ShoulderPosition += _context.Forward * Time.deltaTime * _context.DragSpeed;
         }
         public override void ExitState()
         { }

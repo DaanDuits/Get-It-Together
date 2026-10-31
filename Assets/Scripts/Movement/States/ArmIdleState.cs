@@ -13,14 +13,18 @@ namespace Ignite.Movement.States
         }
 
         public override void EnterState()
-        { }
+        {
+            float offset = _context.Offset;
+            _context.Pivot = _context.ShoulderPosition;
+            _context.Position = (_context.Forward * offset) + _context.Pivot;
+        }
         public override void UpdateState()
         {
             _context.RotationY += _context.MoveInput.x * _context.TurnSpeed * 360f * Time.deltaTime;
 
             Vector3 pos = _context.Position;
             pos.y = 0f;
-            Vector3 target = _context.MovePosition;
+            Vector3 target = _context.ShoulderPosition;
             target.y = 0f;
 
             float dist = (pos - target).magnitude;
