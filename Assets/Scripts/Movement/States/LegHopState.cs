@@ -11,13 +11,24 @@ namespace Ignite.Movement.States
 
         private float _height, _distance;
 
+        private bool _hasStarted;
+        private bool _hasPlayed;
+
         public LegHopState(LegController context) : base(context)
         {
             _context = context;
+            _context.AnimatorBehaviour.OnHopFinished.AddListener(() => {
+                SwitchState(_context.IdleState);
+            });
+            _context.AnimatorBehaviour.OnHopStarted.AddListener(() =>
+            {
+                _hasStarted = true;
+            });
         }
 
         public override void EnterState()
         {
+            _context.Animator.Play("HopBegin", 0);
             _height = Mathf.Lerp(_context.HopHeightRange.x, _context.HopHeightRange.y, _context.HopStrength);
             _distance = Mathf.Lerp(_context.HopDistanceRange.x, _context.HopDistanceRange.y, _context.HopStrength);
 
@@ -25,9 +36,14 @@ namespace Ignite.Movement.States
         }
         public override void UpdateState()
         {
+            if (!_hasStarted)
+                return;
+
             if (_timer == 1f)
             {
-                SwitchState(_context.IdleState);
+                _context.Animator.Play("Landing", 0);
+                _context.AppliedMovement = Vector3.zero;
+                PlayEffectOnce();
                 return;
             }
 
@@ -41,7 +57,17 @@ namespace Ignite.Movement.States
         }
         public override void ExitState()
         {
-            _context.AppliedMovement = Vector3.zero;
+            _hasPlayed = false;
+            _hasStarted = false;
+        }
+
+        private void PlayEffectOnce()
+        {
+            if (_hasPlayed)
+                return;
+
+            _context.DustEffect.Play();
+            _hasPlayed = true;
         }
     }
 }
