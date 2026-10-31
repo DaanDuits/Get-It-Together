@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c213c8a34b2b98643931635c8a38b6cb
+guid: a21a8ebc3702aad45b909f806b9dfdc6
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
@@ -61,7 +61,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: charge.L
+      name: Charge.L
       takeName: Left-Leg-Rig|ArmatureAction.007
       internalID: -6064598801447225722
       firstFrame: 121
@@ -90,9 +90,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: chargeHold.L
-      takeName: Left-Leg-Rig|ArmatureAction.007
-      internalID: 8798700510369151815
+      name: ChargeHold.L
+      takeName: Left-Leg-Rig|ArmatureAction.006
+      internalID: -1302898316749596569
       firstFrame: 192
       lastFrame: 192
       wrapMode: 0
@@ -120,10 +120,10 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: HopBegin.L
-      takeName: Left-Leg-Rig|ArmatureAction.007
-      internalID: -5732360131723865964
+      takeName: Left-Leg-Rig|ArmatureAction.006
+      internalID: 5948480423378853600
       firstFrame: 193
-      lastFrame: 204
+      lastFrame: 203
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -148,9 +148,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: AirTime.L
-      takeName: Left-Leg-Rig|ArmatureAction.007
-      internalID: -6606195254304695785
+      name: Airtime.L
+      takeName: Left-Leg-Rig|ArmatureAction.006
+      internalID: 2527593585063075031
       firstFrame: 204
       lastFrame: 214
       wrapMode: 0
@@ -178,8 +178,8 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Landing.L
-      takeName: Left-Leg-Rig|ArmatureAction.007
-      internalID: 7981960506028998980
+      takeName: Left-Leg-Rig|ArmatureAction.006
+      internalID: 4652175334066139912
       firstFrame: 215
       lastFrame: 230
       wrapMode: 0

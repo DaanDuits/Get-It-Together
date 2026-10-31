@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 43789d620b34bd648ae68710268faab0
+guid: 0b208ccea68d3c24bb298fd6bcfdf33e
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
@@ -61,7 +61,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: charge.R
+      name: Charge.R
       takeName: Right-Leg-Rig|ArmatureAction.007
       internalID: 5525758721409685425
       firstFrame: 121
@@ -90,7 +90,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: chargeHold.R
+      name: ChargeHold.R
       takeName: Right-Leg-Rig|ArmatureAction.007
       internalID: 2816186610304582062
       firstFrame: 192
@@ -148,9 +148,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: AirTime.R
+      name: Airtime.R
       takeName: Right-Leg-Rig|ArmatureAction.007
-      internalID: 5912892087393907448
+      internalID: 999424177346674041
       firstFrame: 204
       lastFrame: 214
       wrapMode: 0
