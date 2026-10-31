@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +16,6 @@ namespace Ignite.Movement.States.Controller
         private float _panMax = 0.5f;
         private CharacterController _controller;
 
-        private HeadIdleState _idleState;
         private HeadRollState _rollState;
 
         private Vector3 _appliedMovement;
@@ -72,8 +72,6 @@ namespace Ignite.Movement.States.Controller
         public Quaternion PanRotation
         { get; set; }
 
-        public HeadIdleState IdleState
-        { get => _idleState; }
         public HeadRollState RollState
         { get => _rollState; }
 
@@ -84,13 +82,22 @@ namespace Ignite.Movement.States.Controller
 
             CameraPosition = transform.position + transform.forward * radius;
             CameraRotation = transform.rotation;
-
-            _idleState = new HeadIdleState(this);
             _rollState = new HeadRollState(this);
 
-            CurrentState = _idleState;
+            CurrentState = _rollState;
 
             _controller = GetComponent<CharacterController>();
+        }
+
+        private void Update()
+        {
+            PanRotation = Quaternion.Euler(-PanAngle(MouseInput.y, PanStart.x), PanAngle(MouseInput.x, PanStart.y), 0f);
+            _mousePos = GameManager.Instance.InputMap.Player.MousePos.ReadValue<Vector2>();
+
+            if (enabled)
+                return;
+
+            camera.transform.rotation = CameraRotation * PanRotation;
         }
 
         public void EnterLimb()
@@ -104,7 +111,6 @@ namespace Ignite.Movement.States.Controller
 
             _controller.Move(_appliedMovement * Time.deltaTime);
 
-            _mousePos = GameManager.Instance.InputMap.Player.MousePos.ReadValue<Vector2>();
             camera.transform.position = CameraPosition;
             camera.transform.rotation = CameraRotation * PanRotation;
 

@@ -15841,8 +15841,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 330585545}
     - target: {fileID: 4145782022682892320, guid: b1c39a2e99886ed4eb2ecd462cfce73c, type: 3}
+      propertyPath: panAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145782022682892320, guid: b1c39a2e99886ed4eb2ecd462cfce73c, type: 3}
       propertyPath: rollSpeed
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145782022682892320, guid: b1c39a2e99886ed4eb2ecd462cfce73c, type: 3}
+      propertyPath: panStart.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145782022682892320, guid: b1c39a2e99886ed4eb2ecd462cfce73c, type: 3}
+      propertyPath: panStart.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6201583005009001613, guid: b1c39a2e99886ed4eb2ecd462cfce73c, type: 3}
       propertyPath: m_LocalPosition.x
