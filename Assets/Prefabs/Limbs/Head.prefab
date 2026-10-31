@@ -72,6 +72,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.HeadState
   radius: 0.15
   rollSpeed: 0.6
-  panAmount: 10
-  panStart: {x: 0.3, y: 0.3}
+  panAmount: 20
+  panStart: {x: 0, y: 0}
   camera: {fileID: 0}
