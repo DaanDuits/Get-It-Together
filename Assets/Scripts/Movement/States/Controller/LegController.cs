@@ -10,6 +10,7 @@ namespace Ignite.Movement.States.Controller
         [SerializeField] private Vector2 hopHeightRange = new Vector2(0.2f, 0.8f);
         [SerializeField] private Vector2 hopDistanceRange = new Vector2(0.5f, 1.5f);
         [SerializeField] private ParticleSystem dustEffect;
+        [SerializeField] private Animator animator;
         [SerializeField] private Transform visualTransform;
 
         private CharacterController _controller;
@@ -34,6 +35,15 @@ namespace Ignite.Movement.States.Controller
         { get => hopDistanceRange; }
         public ParticleSystem DustEffect
         { get => dustEffect; }
+        public Animator Animator
+        { get => animator; }
+        public LegAnimator AnimatorBehaviour
+        { 
+            get
+            {
+                return animator.GetBehaviour<LegAnimator>();
+            }
+        }
         public float AppliedMovementX
         {
             get => _appliedMovement.x;
@@ -87,6 +97,8 @@ namespace Ignite.Movement.States.Controller
             _idleState = new LegIdleState(this);
             _chargeState = new LegChargeState(this);
             _hopState = new LegHopState(this);
+
+            animator.speed = 1f;
         }
 
         private void Update()

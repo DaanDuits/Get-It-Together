@@ -72,7 +72,6 @@ namespace Ignite.Movement.States.Controller
 
             CurrentState.UpdateState();
 
-            Debug.Log(_appliedMovement);
             _controller.Move(_appliedMovement * Time.deltaTime);
 
             camera.position = CameraPosition;

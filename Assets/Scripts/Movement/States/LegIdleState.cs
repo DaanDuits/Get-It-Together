@@ -13,7 +13,9 @@ namespace Ignite.Movement.States
         }
 
         public override void EnterState()
-        { }
+        {
+            _context.Animator.Play("Idle", 0);
+        }
         public override void UpdateState()
         {
             _context.RotationY += _context.MoveInput.x * _context.TurnSpeed * 360f * Time.deltaTime;
