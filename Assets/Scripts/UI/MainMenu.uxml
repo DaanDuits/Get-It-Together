@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/UI/Style/MainMenu.uss?fileID=7433441132597879392&amp;guid=0ca033704103b854ca4968000f302cfe&amp;type=3#MainMenu"/>
-    <ui:VisualElement class="holder">
+    <ui:VisualElement name="menu-holder" class="holder">
         <ui:Label text="Get It Together" class="title"/>
         <ui:Button text="Play" name="play-button" class="button"/>
         <ui:Button text="Quit" name="quit-button" class="button"/>
