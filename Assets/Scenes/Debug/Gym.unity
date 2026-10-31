@@ -15839,7 +15839,7 @@ PrefabInstance:
     - target: {fileID: 4145782022682892320, guid: b1c39a2e99886ed4eb2ecd462cfce73c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 330585546}
+      objectReference: {fileID: 330585545}
     - target: {fileID: 4145782022682892320, guid: b1c39a2e99886ed4eb2ecd462cfce73c, type: 3}
       propertyPath: rollSpeed
       value: 0.6

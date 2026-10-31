@@ -15,6 +15,9 @@ namespace Ignite.Movement.States
         { }
         public override void UpdateState()
         {
+            if (_context.MoveInput == Vector2.zero)
+                SwitchState(_context.IdleState);
+
             _context.AppliedMovementX = _context.MoveInput.x * _context.RollSpeed;
             _context.AppliedMovementZ = _context.MoveInput.y * _context.RollSpeed;
             _context.AppliedMovement = _context.Rotation * _context.AppliedMovement;
