@@ -28,6 +28,7 @@ namespace Ignite.Movement.States
             if (_timer == 1f)
             {
                 SwitchState(_context.IdleState);
+                _context.DustEffect.Play();
                 return;
             }
 
