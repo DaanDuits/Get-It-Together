@@ -13,10 +13,12 @@ namespace Ignite.Movement.States.Controller
         [SerializeField] private Vector2 panStart = new Vector2(0.3f, 0.3f);
         [SerializeField] private new Camera camera;
         [SerializeField] private LimbType type;
+        [SerializeField] private AudioSource rollSound;
 
         private float _panMax = 0.5f;
         private CharacterController _controller;
 
+        private HeadIdleState _idleState;
         private HeadRollState _rollState;
 
         private Vector3 _appliedMovement;
@@ -37,6 +39,8 @@ namespace Ignite.Movement.States.Controller
         { get => rollSpeed; }
         public Vector2 PanStart
         { get => panStart; }
+        public AudioSource RollSound
+        { get => rollSound; }
         public float AppliedMovementX
         {
             get => _appliedMovement.x;
@@ -78,6 +82,8 @@ namespace Ignite.Movement.States.Controller
         public Quaternion PanRotation
         { get; set; }
 
+        public HeadIdleState IdleState
+        { get => _idleState; }
         public HeadRollState RollState
         { get => _rollState; }
 
@@ -88,9 +94,10 @@ namespace Ignite.Movement.States.Controller
 
             CameraPosition = transform.position + transform.forward * radius;
             CameraRotation = transform.rotation;
+            _idleState = new HeadIdleState(this);
             _rollState = new HeadRollState(this);
 
-            CurrentState = _rollState;
+            CurrentState = _idleState;
 
             _controller = GetComponent<CharacterController>();
         }

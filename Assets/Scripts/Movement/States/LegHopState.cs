@@ -66,7 +66,9 @@ namespace Ignite.Movement.States
             if (_hasPlayed)
                 return;
 
+            _context.DustEffect.transform.position = _context.FootPosition;
             _context.DustEffect.Play();
+            _context.LandingSound.Play();
             _hasPlayed = true;
         }
     }

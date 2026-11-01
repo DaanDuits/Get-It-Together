@@ -1,5 +1,3 @@
-using System.Net.Http.Headers;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Ignite.Movement.States.Controller
@@ -14,6 +12,7 @@ namespace Ignite.Movement.States.Controller
         [SerializeField] private LayerMask wallMask;
         [SerializeField] private Transform pivot, shoulder;
         [SerializeField] private LimbType type;
+        [SerializeField] private AudioSource dragSound;
 
         private Vector3 _appliedMovement;
 
@@ -33,6 +32,8 @@ namespace Ignite.Movement.States.Controller
         { get => dragSpeed; }
         public Vector2 ReachDistanceRange
         { get => reachDistanceRange; }
+        public AudioSource DragSound
+        { get => dragSound; }
         public float AppliedMovementX
         {
             get => _appliedMovement.x;

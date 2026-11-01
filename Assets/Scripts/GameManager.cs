@@ -8,6 +8,7 @@ namespace Ignite
     {
         [SerializeField] private int limbCount = 4;
         [SerializeField] private WinScreenUI winScreen;
+        [SerializeField] private Transform vfxHolder;
 
         private InputMap _inputMap;
 
@@ -18,6 +19,8 @@ namespace Ignite
         { get => _inputMap; }
         public int LimbCount
         { get => limbCount; }
+        public Transform VFXHolder
+        {  get => vfxHolder; }
 
         private void Awake()
         {

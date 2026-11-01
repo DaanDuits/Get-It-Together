@@ -9,9 +9,11 @@ namespace Ignite.Movement.States.Controller
         [SerializeField] private float chargeDuration = 1f;
         [SerializeField] private Vector2 hopHeightRange = new Vector2(0.2f, 0.8f);
         [SerializeField] private Vector2 hopDistanceRange = new Vector2(0.5f, 1.5f);
-        [SerializeField] private ParticleSystem dustEffect;
+        [SerializeField] private ParticleSystem dustVFX;
+        [SerializeField] private AudioSource landingSound;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform visualTransform;
+        [SerializeField] private Transform footTransform;
         [SerializeField] private LimbType type;
 
         private CharacterController _controller;
@@ -20,6 +22,8 @@ namespace Ignite.Movement.States.Controller
         private LegIdleState _idleState;
         private LegChargeState _chargeState;
         private LegHopState _hopState;
+
+        private ParticleSystem _dustEffect;
 
         private bool _isActive;
 
@@ -39,7 +43,9 @@ namespace Ignite.Movement.States.Controller
         public Vector2 HopDistanceRange
         { get => hopDistanceRange; }
         public ParticleSystem DustEffect
-        { get => dustEffect; }
+        { get => _dustEffect; }
+        public AudioSource LandingSound
+        {  get => landingSound; }
         public Animator Animator
         { get => animator; }
         public LegAnimator AnimatorBehaviour
@@ -77,6 +83,8 @@ namespace Ignite.Movement.States.Controller
         { get => transform.forward; }
         public Vector3 VisualPosition
         { set => visualTransform.localPosition = value; }
+        public Vector3 FootPosition
+        { get => footTransform.position; }
         public float RotationY 
         { get; set; }
         public bool IsCharging
@@ -95,6 +103,7 @@ namespace Ignite.Movement.States.Controller
 
         private void Start()
         {
+            _dustEffect = Instantiate(dustVFX, GameManager.Instance.VFXHolder);
             _controller = GetComponent<CharacterController>();
 
             RotationY = transform.rotation.eulerAngles.y;

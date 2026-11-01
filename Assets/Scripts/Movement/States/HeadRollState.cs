@@ -12,9 +12,17 @@ namespace Ignite.Movement.States
         }
 
         public override void EnterState()
-        { }
+        {
+            _context.RollSound.Play();
+        }
         public override void UpdateState()
         {
+            if (_context.MoveInput == Vector2.zero)
+            {
+                SwitchState(_context.IdleState);
+                return;
+            }
+
             _context.AppliedMovementX = _context.MoveInput.x * _context.RollSpeed;
             _context.AppliedMovementZ = _context.MoveInput.y * _context.RollSpeed;
             _context.AppliedMovement = _context.Rotation * _context.AppliedMovement;
@@ -31,6 +39,9 @@ namespace Ignite.Movement.States
             _context.CameraPosition = _context.Position + _context.CameraRotation * new Vector3(0, 0, _context.Radius);
         }
         public override void ExitState()
-        { }
+        {
+            _context.RollSound.Pause();
+            _context.AppliedMovement = Vector3.zero;
+        }
     }
 }
