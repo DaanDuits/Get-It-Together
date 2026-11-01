@@ -1,0 +1,13 @@
+:root {
+}
+
+.blackout {
+    background-color: rgb(0, 0, 0);
+    flex-grow: 1;
+    transition-property: opacity;
+    transition-duration: 1s;
+}
+
+.fade-out {
+    opacity: 0;
+}

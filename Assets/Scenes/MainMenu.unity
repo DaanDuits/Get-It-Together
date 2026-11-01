@@ -440,6 +440,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
+--- !u!95 &1715541083 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5538535063289253299, guid: ec4b2186e16a2a94f8f0620cdd7ba780, type: 3}
+  m_PrefabInstance: {fileID: 1712292004}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1995392710
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17093578a4c6ae4fa0172d32ea618c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.UI.MainMenuUI
+  animator: {fileID: 1715541083}
 --- !u!114 &1995392713
 MonoBehaviour:
   m_ObjectHideFlags: 0

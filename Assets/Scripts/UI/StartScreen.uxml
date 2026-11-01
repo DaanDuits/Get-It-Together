@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Style/StartScreen.uss?fileID=7433441132597879392&amp;guid=48f3e6beecb992442abd827fb42043bc&amp;type=3#StartScreen"/>
+    <ui:VisualElement name="background" class="blackout"/>
+</ui:UXML>
