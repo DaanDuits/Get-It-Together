@@ -6,6 +6,7 @@ namespace Ignite.Movement
     public class PossessionController : MonoBehaviour
     {
         [SerializeField] private float possessionDistance = 5f;
+        [SerializeField] private LayerMask rayMask;
         [SerializeField] private LayerMask possessionLayer;
         [SerializeField] private new Camera camera;
         [SerializeField] private GameObject startLimb;
@@ -42,8 +43,11 @@ namespace Ignite.Movement
                 return;
 
             _currentLimb.ExitLimb();
-            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, rayMask))
             {
+                if (((1 << hit.collider.gameObject.layer) & possessionLayer) == 0)
+                    return;
+
                 IPossessable possessable = hit.collider.gameObject.GetComponent<IPossessable>();
                 _currentLimb = possessable.Controller;
             }

@@ -27,11 +27,6 @@ namespace Ignite.Movement.States
             _context.AppliedMovementZ = _context.MoveInput.y * _context.RollSpeed;
             _context.AppliedMovement = _context.Rotation * _context.AppliedMovement;
 
-            if (!(_context.MoveInput.x != 0f || _context.MoveInput.y != 0f))
-            {
-                _context.Rotation = Quaternion.AngleAxis(_context.CameraRotation.eulerAngles.y, Vector3.up);
-                return;
-            }
             Vector3 w = Vector3.Cross(_context.AppliedMovement, Vector3.up) / _context.Radius;
             float theta = -(w.magnitude * Time.deltaTime) * Mathf.Rad2Deg;
             Quaternion dQ = Quaternion.AngleAxis(theta, w.normalized);
@@ -42,6 +37,7 @@ namespace Ignite.Movement.States
         {
             _context.RollSound.Pause();
             _context.AppliedMovement = Vector3.zero;
+            _context.Rotation = Quaternion.AngleAxis(_context.CameraRotation.eulerAngles.y, Vector3.up);
         }
     }
 }
