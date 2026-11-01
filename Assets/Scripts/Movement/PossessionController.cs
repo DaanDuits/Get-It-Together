@@ -38,9 +38,14 @@ namespace Ignite.Movement
 
             _currentLimb.ExitLimb();
             if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, possessionLayer))
-                _currentLimb = hit.collider.gameObject.GetComponent<ILimbController>();
+            {
+                IPossessable possessable = hit.collider.gameObject.GetComponent<IPossessable>();
+                _currentLimb = possessable.Controller;
+            }
             else
+            {
                 _currentLimb = _startLimb;
+            }
             _currentLimb.EnterLimb();
         }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Ignite.Movement.States.Controller
 {
     [RequireComponent(typeof(CharacterController))]
-    public class LegController : MonoBehaviour, ILimbController
+    public class LegController : MonoBehaviour, ILimbController, IPossessable
     {
         [SerializeField] private float turnSpeed = 0.4f;
         [SerializeField] private float chargeDuration = 1f;
@@ -27,6 +27,8 @@ namespace Ignite.Movement.States.Controller
         { get; set; }
         public LimbType Type
         { get => type; }
+        public ILimbController Controller
+        { get => this; }
 
         public float TurnSpeed
         { get => turnSpeed; }

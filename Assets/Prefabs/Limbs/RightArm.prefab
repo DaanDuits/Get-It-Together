@@ -73,7 +73,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7040119257075582806}
-  - component: {fileID: 785638352296545732}
   - component: {fileID: 4897761251957940982}
   m_Layer: 3
   m_Name: Target
@@ -97,31 +96,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8536138089021007452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &785638352296545732
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270754019309536518}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 0.05
-  m_Radius: 0.11
-  m_SlopeLimit: 0
-  m_StepOffset: 0
-  m_SkinWidth: 0.0001
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.06, z: 0}
 --- !u!114 &4897761251957940982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,10 +108,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b7aeac12706f44db4b4a5130fd107a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.States.Controller.ArmController
-  turnSpeed: 0.1
-  dragSpeed: 0.2
+  turnSpeed: 0.2
+  dragSpeed: 0.4
   skinWidth: 0.05
-  reachDistanceRange: {x: 0.2, y: 0.61}
+  handRadius: 0.1
+  reachDistanceRange: {x: 0.2, y: 0.6}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 64
+  pivot: {fileID: 8536138089021007452}
+  shoulder: {fileID: 3871437162713786437}
   type: 2
 --- !u!1 &289368062941785783
 GameObject:
@@ -283,7 +263,7 @@ Transform:
   m_GameObject: {fileID: 2073507846190267051}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.712, y: 0.448, z: -0.6786}
+  m_LocalPosition: {x: 0.712, y: 0.48, z: -0.6786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -425,7 +405,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3007356511150662737}
-  m_Layer: 0
+  - component: {fileID: 9068512749674776292}
+  - component: {fileID: 7255392084292949879}
+  - component: {fileID: 840177859233805424}
+  m_Layer: 3
   m_Name: UpperArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,6 +431,69 @@ Transform:
   - {fileID: 5760591779083316080}
   m_Father: {fileID: 6626597172499352818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &9068512749674776292
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2989717576632274058}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0009
+  m_Height: 0.004
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.001, z: 0}
+--- !u!114 &7255392084292949879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2989717576632274058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694796314d45be14f86d7899740c357d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ignite.ArmBone
+  controller: {fileID: 4897761251957940982}
+--- !u!54 &840177859233805424
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2989717576632274058}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3063989525783409941
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7774879019260143632}
   - component: {fileID: 1831916911461778387}
+  - component: {fileID: 7974844309749051149}
   m_Layer: 0
   m_Name: Right-Arm
   m_TagString: Untagged
@@ -690,6 +737,33 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00016651742, y: 0.0035777218, z: 0.000088472414}
     m_Extent: {x: 0.0009193355, y: 0.0040136822, z: 0.0008845407}
   m_DirtyAABB: 0
+--- !u!54 &7974844309749051149
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5028214470313327516}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5401134960544110846
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,7 +900,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1852194138867050732}
-  m_Layer: 0
+  - component: {fileID: 7950686116983815030}
+  - component: {fileID: 5045699408444171578}
+  m_Layer: 3
   m_Name: Wrist.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,6 +929,42 @@ Transform:
   - {fileID: 2538461748733140747}
   m_Father: {fileID: 5760591779083316080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7950686116983815030
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363632439463134266}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0009
+  m_Height: 0
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.0005, z: 0}
+--- !u!114 &5045699408444171578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363632439463134266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694796314d45be14f86d7899740c357d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ignite.ArmBone
+  controller: {fileID: 4897761251957940982}
 --- !u!1 &6435279897502196777
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6626597172499352818}
   - component: {fileID: 4912033507743309107}
+  - component: {fileID: 4045484091993067107}
   m_Layer: 0
   m_Name: Right-Arm-Rig
   m_TagString: Untagged
@@ -908,6 +1021,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &4045484091993067107
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435279897502196777}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6556741408024312015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1544,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5760591779083316080}
-  m_Layer: 0
+  - component: {fileID: 9099535725274404030}
+  - component: {fileID: 4833425659327721309}
+  m_Layer: 3
   m_Name: LowerArm.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1427,3 +1569,39 @@ Transform:
   - {fileID: 1852194138867050732}
   m_Father: {fileID: 3007356511150662737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &9099535725274404030
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8452616430258550563}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0009
+  m_Height: 0.004
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.001, z: 0}
+--- !u!114 &4833425659327721309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8452616430258550563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694796314d45be14f86d7899740c357d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ignite.ArmBone
+  controller: {fileID: 4897761251957940982}

@@ -140,7 +140,7 @@ namespace Ignite.Movement.States.Controller
 
         public void Destroy()
         {
-            Destroy(transform.parent.gameObject);
+            Destroy(pivot.parent.gameObject);
         }
     }
 }

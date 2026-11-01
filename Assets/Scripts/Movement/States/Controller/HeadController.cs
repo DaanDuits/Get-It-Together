@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace Ignite.Movement.States.Controller
 {
     [RequireComponent(typeof(CharacterController))]
-    public class HeadController : MonoBehaviour, ILimbController
+    public class HeadController : MonoBehaviour, ILimbController, IPossessable
     {
         [SerializeField] private float radius;
         [SerializeField] private float rollSpeed;
@@ -28,6 +28,8 @@ namespace Ignite.Movement.States.Controller
         { get; set; }
         public LimbType Type
         { get => type; }
+        public ILimbController Controller
+        { get => this; }
 
         public float Radius
         { get => radius; }

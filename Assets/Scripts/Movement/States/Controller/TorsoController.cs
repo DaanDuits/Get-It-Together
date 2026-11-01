@@ -45,7 +45,8 @@ namespace Ignite.Movement.States.Controller
             if ((limbLayer & (1 << other.gameObject.layer)) == 0)
                 return;
 
-            _current = other.GetComponent<ILimbController>();
+            IPossessable possessable = other.gameObject.GetComponent<IPossessable>();
+            _current = possessable.Controller;
             _controller.Reset();
             Render(_current.Type);
             _current.Destroy();
