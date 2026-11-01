@@ -25,6 +25,7 @@ namespace Ignite.Movement.States.Controller
 
         private Vector2 _mousePos, _mouseInput;
         private bool _isActive;
+        private bool _isPanLocked;
 
         public LimbMovementState CurrentState 
         { get; set; }
@@ -107,7 +108,7 @@ namespace Ignite.Movement.States.Controller
             PanRotation = Quaternion.Euler(-PanAngle(MouseInput.y, PanStart.x), PanAngle(MouseInput.x, PanStart.y), 0f);
             _mousePos = GameManager.Instance.InputMap.Player.MousePos.ReadValue<Vector2>();
 
-            if (_isActive)
+            if (_isActive && _isPanLocked)
                 return;
 
             camera.transform.rotation = CameraRotation * PanRotation;
@@ -152,6 +153,11 @@ namespace Ignite.Movement.States.Controller
         public void Destroy()
         {
             Destroy(gameObject);
+        }
+
+        public void LockPan(bool locked)
+        {
+            _isPanLocked = locked;
         }
     }
 }

@@ -47,7 +47,7 @@
                     "priority": 0
                 },
                 {
-                    "name": "Submit",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "45737a86-6615-439b-8926-f5e44f8cfdc2",
                     "expectedControlType": "",
@@ -193,11 +193,11 @@
                 {
                     "name": "",
                     "id": "c177c47e-afd2-4716-8246-c3ec85371ea1",
-                    "path": "<Keyboard>/enter",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Submit",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

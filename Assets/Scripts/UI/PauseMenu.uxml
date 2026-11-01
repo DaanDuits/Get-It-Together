@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/Style/PauseMernu.uss?fileID=7433441132597879392&amp;guid=e1e55b3bf8d91914fb0815e97f34e3a2&amp;type=3#PauseMernu"/>
+    <ui:VisualElement class="menu-holder">
+        <ui:Label text="Paused" class="title"/>
+        <ui:Button text="Continue" name="continue-button"/>
+        <ui:Button text="Main Menu" name="main-menu-button"/>
+    </ui:VisualElement>
+</ui:UXML>
