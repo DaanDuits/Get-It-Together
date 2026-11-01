@@ -8,13 +8,18 @@ namespace Ignite.Movement.States.Controller
     {
         [SerializeField] private float turnSpeed = 0.2f;
         [SerializeField] private float dragSpeed = 0.4f;
+        [SerializeField] private float skinWidth = 0.05f;
+        [SerializeField] private float handRadius = 0.1f;
         [SerializeField] private Vector2 reachDistanceRange = new Vector2(0.2f, 0.8f);
+        [SerializeField] private LayerMask wallMask;
         [SerializeField] private Transform pivot, shoulder;
 
         private Vector3 _appliedMovement;
 
         private ArmIdleState _idleState;
         private ArmDragState _dragState;
+
+        private bool _positionLocked;
 
         public LimbMovementState CurrentState
         { get; set; }
@@ -89,6 +94,26 @@ namespace Ignite.Movement.States.Controller
             _dragState = new ArmDragState(this);
         }
 
+        private void FixedUpdate()
+        {
+            float radius = (ShoulderPosition - Position).magnitude;
+            if (Physics.Raycast(ShoulderPosition, transform.forward, radius + skinWidth, wallMask))
+                IsDragging = false;
+            else
+                IsDragging = GameManager.Instance.InputMap.Player.Charge.ReadValue<float>() > 0f;
+
+            if (!Physics.CheckSphere(ShoulderPosition, radius + skinWidth, wallMask))
+                return;
+
+            _positionLocked = true;
+
+            Vector3 predictedPos = Position + _appliedMovement * Time.deltaTime;
+            if (Physics.CheckSphere(predictedPos, handRadius, wallMask))
+                return;
+
+            _positionLocked = false;
+        }
+
         public void EnterLimb()
         {
             CurrentState = _idleState;
@@ -101,14 +126,16 @@ namespace Ignite.Movement.States.Controller
             CurrentState.UpdateState();
 
             MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
-            IsDragging = GameManager.Instance.InputMap.Player.Charge.ReadValue<float>() > 0f;
+
             Rotation = Quaternion.AngleAxis(RotationY, Vector3.up);
             shoulder.rotation = Rotation;
 
-            transform.position += _appliedMovement * Time.deltaTime;
+            if (!_positionLocked)
+                transform.position += _appliedMovement * Time.deltaTime;
         }
         public void ExitLimb()
-        { }
+        {
+        }
 
         public void Lock()
         {
