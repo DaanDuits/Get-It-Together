@@ -138,11 +138,7 @@ MonoBehaviour:
   dragSpeed: 0.2
   skinWidth: 0.05
   reachDistanceRange: {x: 0.2, y: 0.61}
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 64
-  pivot: {fileID: 8536138089021007452}
-  shoulder: {fileID: 3871437162713786437}
+  type: 2
 --- !u!1 &289368062941785783
 GameObject:
   m_ObjectHideFlags: 0

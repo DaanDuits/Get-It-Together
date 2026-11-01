@@ -15773,7 +15773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302519564428827673, guid: 0e0bd4d6078474d4797e2741528be2bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.483
+      value: -0.61
       objectReference: {fileID: 0}
     - target: {fileID: 7302519564428827673, guid: 0e0bd4d6078474d4797e2741528be2bd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15823,6 +15823,10 @@ PrefabInstance:
     - target: {fileID: 2174549490910238509, guid: 73f46ba749d2df7458233cdb92dfdd09, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813644542266694831, guid: 73f46ba749d2df7458233cdb92dfdd09, type: 3}
+      propertyPath: limbCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5813644542266694831, guid: 73f46ba749d2df7458233cdb92dfdd09, type: 3}
       propertyPath: winScreen

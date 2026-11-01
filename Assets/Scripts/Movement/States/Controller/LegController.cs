@@ -12,6 +12,7 @@ namespace Ignite.Movement.States.Controller
         [SerializeField] private ParticleSystem dustEffect;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform visualTransform;
+        [SerializeField] private LimbType type;
 
         private CharacterController _controller;
         private Vector3 _appliedMovement;
@@ -24,6 +25,8 @@ namespace Ignite.Movement.States.Controller
 
         public LimbMovementState CurrentState
         { get; set; }
+        public LimbType Type
+        { get => type; }
 
         public float TurnSpeed
         { get => turnSpeed; }
@@ -104,9 +107,7 @@ namespace Ignite.Movement.States.Controller
         private void Update()
         {
             if (_appliedMovement != Vector3.zero && !_isActive)
-            {
                 UpdateLimb();
-            }
         }
 
         public void EnterLimb()
@@ -118,8 +119,6 @@ namespace Ignite.Movement.States.Controller
         }
         public void UpdateLimb()
         {
-            if (!enabled)
-                return;
             CurrentState.UpdateState();
 
             IsCharging = GameManager.Instance.InputMap.Player.Charge.ReadValue<float>() == 1f;
@@ -133,9 +132,9 @@ namespace Ignite.Movement.States.Controller
             _isActive = false;
         }
 
-        public void Lock()
+        public void Destroy()
         {
-            enabled = false;
+            Destroy(gameObject);
         }
     }
 }

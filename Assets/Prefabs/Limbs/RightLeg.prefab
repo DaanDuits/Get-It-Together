@@ -265,6 +265,7 @@ MonoBehaviour:
   dustEffect: {fileID: 1817965716842437011}
   animator: {fileID: 7755533778430577804}
   visualTransform: {fileID: 3462268177604741127}
+  type: 4
 --- !u!1 &4563303954414952098
 GameObject:
   m_ObjectHideFlags: 0

@@ -645,7 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7907974857882212213}
   - component: {fileID: 5888854209720357686}
-  - component: {fileID: 7778190756849534808}
+  - component: {fileID: 8204871279792950629}
   m_Layer: 3
   m_Name: Target
   m_TagString: Untagged
@@ -693,7 +693,7 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.06, z: 0}
---- !u!114 &7778190756849534808
+--- !u!114 &8204871279792950629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -714,6 +714,7 @@ MonoBehaviour:
     m_Bits: 64
   pivot: {fileID: 642268123395150401}
   shoulder: {fileID: 1708450031293197948}
+  type: 1
 --- !u!1 &5152445400839718261
 GameObject:
   m_ObjectHideFlags: 0
