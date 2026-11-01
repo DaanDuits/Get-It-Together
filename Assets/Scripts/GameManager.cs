@@ -6,10 +6,9 @@ namespace Ignite
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private int winCondition = 5;
+        [SerializeField] private int limbCount = 4;
         [SerializeField] private WinScreenUI winScreen;
 
-        private int _winCounter;
         private InputMap _inputMap;
 
         public static GameManager Instance
@@ -17,11 +16,8 @@ namespace Ignite
 
         public InputMap InputMap
         { get => _inputMap; }
-
-        public int WinCounter
-        { get => _winCounter; }
-        public int WinCondition
-        { get => winCondition; }
+        public int LimbCount
+        { get => limbCount; }
 
         private void Awake()
         {
@@ -36,12 +32,9 @@ namespace Ignite
             _inputMap = new InputMap();
         }
 
-        public void AddWin()
+        public void Win()
         {
-            _winCounter++;
-
-            if (_winCounter == winCondition)
-                winScreen.Enable();
+            winScreen.Enable();
         }
 
         private void OnEnable()

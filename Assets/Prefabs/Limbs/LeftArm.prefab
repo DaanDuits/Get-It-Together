@@ -614,7 +614,6 @@ GameObject:
   - component: {fileID: 7907974857882212213}
   - component: {fileID: 5888854209720357686}
   - component: {fileID: 8204871279792950629}
-  - component: {fileID: 7778190756849534808}
   m_Layer: 3
   m_Name: Target
   m_TagString: Untagged
@@ -677,21 +676,7 @@ MonoBehaviour:
   turnSpeed: 0.1
   dragSpeed: 0.2
   reachDistanceRange: {x: 0.2, y: 0.61}
---- !u!114 &7778190756849534808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4467291749116994538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b7aeac12706f44db4b4a5130fd107a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Ignite.Movement.States.Controller.ArmController
-  turnSpeed: 0.2
-  dragSpeed: 0.4
-  reachDistanceRange: {x: 0.2, y: 0.8}
+  type: 1
 --- !u!1 &5152445400839718261
 GameObject:
   m_ObjectHideFlags: 0

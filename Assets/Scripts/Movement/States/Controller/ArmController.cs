@@ -9,6 +9,7 @@ namespace Ignite.Movement.States.Controller
         [SerializeField] private float turnSpeed = 0.2f;
         [SerializeField] private float dragSpeed = 0.4f;
         [SerializeField] private Vector2 reachDistanceRange = new Vector2(0.2f, 0.8f);
+        [SerializeField] private LimbType type;
 
         private CharacterController _controller;
 
@@ -19,6 +20,8 @@ namespace Ignite.Movement.States.Controller
 
         public LimbMovementState CurrentState
         { get; set; }
+        public LimbType Type
+        { get => type; }
 
         public float TurnSpeed
         { get => turnSpeed; }
@@ -84,8 +87,6 @@ namespace Ignite.Movement.States.Controller
         }
         public void UpdateLimb()
         {
-            if (!enabled)
-                return;
             CurrentState.UpdateState();
 
             MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
@@ -98,9 +99,9 @@ namespace Ignite.Movement.States.Controller
         public void ExitLimb()
         { }
 
-        public void Lock()
+        public void Destroy()
         {
-            enabled = false;
+            Destroy(transform.parent.gameObject);
         }
     }
 }

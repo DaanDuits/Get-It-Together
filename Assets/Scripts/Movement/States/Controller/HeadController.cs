@@ -12,6 +12,7 @@ namespace Ignite.Movement.States.Controller
         [SerializeField] private float panAmount = 10f;
         [SerializeField] private Vector2 panStart = new Vector2(0.3f, 0.3f);
         [SerializeField] private new Camera camera;
+        [SerializeField] private LimbType type;
 
         private float _panMax = 0.5f;
         private CharacterController _controller;
@@ -21,9 +22,12 @@ namespace Ignite.Movement.States.Controller
         private Vector3 _appliedMovement;
 
         private Vector2 _mousePos, _mouseInput;
+        private bool _isActive;
 
         public LimbMovementState CurrentState 
         { get; set; }
+        public LimbType Type
+        { get => type; }
 
         public float Radius
         { get => radius; }
@@ -94,19 +98,18 @@ namespace Ignite.Movement.States.Controller
             PanRotation = Quaternion.Euler(-PanAngle(MouseInput.y, PanStart.x), PanAngle(MouseInput.x, PanStart.y), 0f);
             _mousePos = GameManager.Instance.InputMap.Player.MousePos.ReadValue<Vector2>();
 
-            if (enabled)
+            if (_isActive)
                 return;
 
             camera.transform.rotation = CameraRotation * PanRotation;
         }
 
         public void EnterLimb()
-        { }
+        {
+            _isActive = true;
+        }
         public void UpdateLimb()
         {
-            if (!enabled)
-                return;
-
             CurrentState.UpdateState();
 
             _controller.Move(_appliedMovement * Time.deltaTime);
@@ -117,7 +120,9 @@ namespace Ignite.Movement.States.Controller
             MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
         }
         public void ExitLimb()
-        { }
+        {
+            _isActive = false;
+        }
 
         public float PanAngle(float mousePos, float panExtend)
         {
@@ -135,9 +140,9 @@ namespace Ignite.Movement.States.Controller
             return 0f;
         }
 
-        public void Lock()
+        public void Destroy()
         {
-            enabled = false;
+            Destroy(gameObject);
         }
     }
 }

@@ -43,5 +43,12 @@ namespace Ignite.Movement
                 _currentLimb = _startLimb;
             _currentLimb.EnterLimb();
         }
+
+        public void Reset()
+        {
+            _currentLimb.ExitLimb();
+            _currentLimb = _startLimb;
+            _currentLimb.EnterLimb();
+        }
     }
 }
