@@ -22,6 +22,7 @@
     -unity-text-outline-width: 3px;
     -unity-text-outline-color: rgb(255, 255, 255);
     color: rgb(51, 51, 51);
+    -unity-font-definition: url("project://database/Assets/Art/Font/MidnightSpree-Regular.ttf?fileID=12800000&guid=655f0f26f981e11458be2fe61262c730&type=3#MidnightSpree-Regular");
 }
 
 .fade-out {
