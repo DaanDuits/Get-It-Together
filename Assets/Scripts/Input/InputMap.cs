@@ -135,7 +135,7 @@ namespace Ignite.Input
                     ""priority"": 0
                 },
                 {
-                    ""name"": ""Submit"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""45737a86-6615-439b-8926-f5e44f8cfdc2"",
                     ""expectedControlType"": """",
@@ -281,11 +281,11 @@ namespace Ignite.Input
                 {
                     ""name"": """",
                     ""id"": ""c177c47e-afd2-4716-8246-c3ec85371ea1"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Submit"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -361,7 +361,7 @@ namespace Ignite.Input
             m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
             m_Player_MousePressed = m_Player.FindAction("MousePressed", throwIfNotFound: true);
             m_Player_Charge = m_Player.FindAction("Charge", throwIfNotFound: true);
-            m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
+            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         }
 
         ~@InputMap()
@@ -446,7 +446,7 @@ namespace Ignite.Input
         private readonly InputAction m_Player_MousePos;
         private readonly InputAction m_Player_MousePressed;
         private readonly InputAction m_Player_Charge;
-        private readonly InputAction m_Player_Submit;
+        private readonly InputAction m_Player_Pause;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -475,9 +475,9 @@ namespace Ignite.Input
             /// </summary>
             public InputAction @Charge => m_Wrapper.m_Player_Charge;
             /// <summary>
-            /// Provides access to the underlying input action "Player/Submit".
+            /// Provides access to the underlying input action "Player/Pause".
             /// </summary>
-            public InputAction @Submit => m_Wrapper.m_Player_Submit;
+            public InputAction @Pause => m_Wrapper.m_Player_Pause;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -516,9 +516,9 @@ namespace Ignite.Input
                 @Charge.started += instance.OnCharge;
                 @Charge.performed += instance.OnCharge;
                 @Charge.canceled += instance.OnCharge;
-                @Submit.started += instance.OnSubmit;
-                @Submit.performed += instance.OnSubmit;
-                @Submit.canceled += instance.OnSubmit;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             /// <summary>
@@ -542,9 +542,9 @@ namespace Ignite.Input
                 @Charge.started -= instance.OnCharge;
                 @Charge.performed -= instance.OnCharge;
                 @Charge.canceled -= instance.OnCharge;
-                @Submit.started -= instance.OnSubmit;
-                @Submit.performed -= instance.OnSubmit;
-                @Submit.canceled -= instance.OnSubmit;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             /// <summary>
@@ -679,12 +679,12 @@ namespace Ignite.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnCharge(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "Submit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnSubmit(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }

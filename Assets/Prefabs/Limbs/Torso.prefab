@@ -546,7 +546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d27aac5739b3e84ebb533eb127a7943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ignite.PossessionController
-  possessionDistance: 5
+  possessionDistance: 100
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 72
   possessionLayer:
     serializedVersion: 2
     m_Bits: 8
