@@ -1,4 +1,5 @@
 :root {
+    -unity-font-definition: url("project://database/Assets/Art/Font/MidnightSpree-Regular.ttf?fileID=12800000&guid=655f0f26f981e11458be2fe61262c730&type=3#MidnightSpree-Regular");
 }
 
 .content-holder {
@@ -10,10 +11,11 @@
 }
 
 .title {
-    color: rgb(180, 180, 180);
-    -unity-text-outline-color: rgb(0, 0, 0);
+    color: rgb(35, 35, 35);
+    -unity-text-outline-color: rgb(228, 228, 228);
     -unity-text-outline-width: 1px;
-    font-size: 65px;
+    font-size: 43px;
+    -unity-font-style: bold;
 }
 
 .button {

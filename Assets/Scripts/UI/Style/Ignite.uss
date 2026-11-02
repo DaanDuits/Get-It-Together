@@ -1,0 +1,46 @@
+:root {
+}
+
+.button {
+    width: 250px;
+    height: 50px;
+    font-size: 30px;
+    background-image: url("project://database/Assets/Art/Textures/textbar.png?fileID=2800000&guid=7d3d6031fca08d045a90af6a1e4b2116&type=3#textbar");
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0.42);
+    -unity-font-definition: url("project://database/Assets/Art/Font/MidnightSpree-Regular.ttf?fileID=12800000&guid=655f0f26f981e11458be2fe61262c730&type=3#MidnightSpree-Regular");
+    color: rgb(228, 228, 228);
+    transition-property: -unity-background-image-tint-color;
+    transition-duration: 0.1s;
+}
+
+.button:hover {
+    width: 250px;
+    height: 50px;
+    background-image: url("project://database/Assets/Art/Textures/textbar.png?fileID=2800000&guid=7d3d6031fca08d045a90af6a1e4b2116&type=3#textbar");
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0.8);
+}
+
+.button:active {
+    width: 250px;
+    height: 50px;
+    background-image: url("project://database/Assets/Art/Textures/textbar.png?fileID=2800000&guid=7d3d6031fca08d045a90af6a1e4b2116&type=3#textbar");
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    -unity-background-image-tint-color: rgba(207, 207, 207, 0.8);
+    transition-property: color;
+    transition-duration: 0.1s;
+    color: rgb(24, 24, 24);
+}

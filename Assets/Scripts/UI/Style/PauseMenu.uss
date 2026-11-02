@@ -16,4 +16,5 @@
     -unity-text-outline-width: 2px;
     -unity-text-outline-color: rgb(0, 0, 0);
     -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/Art/Font/MidnightSpree-Regular.ttf?fileID=12800000&guid=655f0f26f981e11458be2fe61262c730&type=3#MidnightSpree-Regular");
 }
