@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Ignite.Movement.States.Controller;
 using Ignite.Movement;
+using Ignite.Animation;
 
 namespace Ignite
 {
@@ -16,6 +17,7 @@ namespace Ignite
         [SerializeField] private PauseScreenUI pauseScreenUI;
         [SerializeField] private HeadController headController;
         [SerializeField] private PossessionController possessionController;
+        [SerializeField] private WinAnimation winAnimation;
         [SerializeField] private Volume globalVolume;
         [SerializeField] private Transform vfxHolder;
 
@@ -54,6 +56,10 @@ namespace Ignite
         public void Win()
         {
             winScreen.Enable();
+            winAnimation.Play();
+
+            headController.LockPan(true);
+            possessionController.Lock(true);
         }
 
         private void OnEnable()

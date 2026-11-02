@@ -13,6 +13,7 @@ namespace Ignite.Movement.States.Controller
         [System.Serializable]
         private struct LimbSettings
         {
+            public Renderer Head;
             public Renderer LeftArm, RightArm;
             public Renderer LeftLeg, RightLeg;
         }
@@ -20,7 +21,6 @@ namespace Ignite.Movement.States.Controller
         private Dictionary<LimbType, Renderer> _renderers;
         private List<bool> _enabled = new List<bool>();
 
-        private bool _hasEntered;
         private ILimbController _current;
 
         private PossessionController _controller;
@@ -30,6 +30,7 @@ namespace Ignite.Movement.States.Controller
             _controller = GetComponent<PossessionController>();
 
             _renderers = new Dictionary<LimbType, Renderer>() {
+                { LimbType.Head, limbs.Head },
                 { LimbType.LeftArm, limbs.LeftArm }, { LimbType.RightArm, limbs.RightArm },
                 { LimbType.LeftLeg, limbs.LeftLeg }, { LimbType.RightLeg, limbs.RightLeg }
             };
@@ -58,6 +59,7 @@ namespace Ignite.Movement.States.Controller
         private void OnHeadAttached()
         {
             GameManager.Instance.Win();
+            _renderers[LimbType.Head].enabled = true;
         }
 
         private void Render(LimbType type)

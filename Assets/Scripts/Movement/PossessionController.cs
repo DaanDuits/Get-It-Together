@@ -1,5 +1,6 @@
 using UnityEngine;
 using Ignite.Movement.States.Controller;
+using System.Net;
 
 namespace Ignite.Movement
 {
@@ -46,7 +47,11 @@ namespace Ignite.Movement
             if (Physics.Raycast(ray, out RaycastHit hit, possessionDistance, rayMask))
             {
                 if (((1 << hit.collider.gameObject.layer) & possessionLayer) == 0)
+                {
+                    _currentLimb = _startLimb;
+                    _currentLimb.EnterLimb();
                     return;
+                }
 
                 IPossessable possessable = hit.collider.gameObject.GetComponent<IPossessable>();
                 _currentLimb = possessable.Controller;
