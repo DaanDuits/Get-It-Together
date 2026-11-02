@@ -2325,6 +2325,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.9330416, y: 3.7796583, z: 1.002603}
   m_Center: {x: -0.24988508, y: -0.2556672, z: -0.5830171}
+--- !u!1 &2175641574716416646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4017341292983872507}
+  - component: {fileID: 1159720545125513255}
+  m_Layer: 6
+  m_Name: Wall (24)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4017341292983872507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2175641574716416646}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071069, z: -0, w: -0.7071067}
+  m_LocalPosition: {x: 2.07, y: 2.165, z: -10.165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6580648056849531864}
+  m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
+--- !u!65 &1159720545125513255
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2175641574716416646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1643558, y: 2.4295566, z: 1.7769537}
+  m_Center: {x: -0.15684861, y: -0.93071806, z: -0.17708468}
 --- !u!1 &2338763542311778299
 GameObject:
   m_ObjectHideFlags: 0
@@ -4068,6 +4121,7 @@ Transform:
   - {fileID: 7886075695012016915}
   - {fileID: 3045417849299081163}
   - {fileID: 4372452512660001169}
+  - {fileID: 4017341292983872507}
   - {fileID: 2094889546334402296}
   - {fileID: 5674147245306700348}
   - {fileID: 4826105419747776167}
