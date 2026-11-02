@@ -125,7 +125,9 @@ namespace Ignite.Movement.States.Controller
             _controller.Move(_appliedMovement * Time.deltaTime);
 
             camera.transform.position = CameraPosition;
-            camera.transform.rotation = CameraRotation * PanRotation;
+            
+            if (!_isPanLocked)
+                camera.transform.rotation = CameraRotation * PanRotation;
 
             MoveInput = GameManager.Instance.InputMap.Player.Move.ReadValue<Vector2>();
         }
